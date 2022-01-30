@@ -2,6 +2,6 @@
 
 * [top](README.md)
 
-## 🤖 etc
+## etc
 
 * [Syntax](etc/markdown-syntax.md)
