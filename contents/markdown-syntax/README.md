@@ -57,7 +57,27 @@ my code blocks
 
 {% embed url="https://www.instagram.com/p/CZDt1hFp7xC" %}
 
-<table><thead><tr><th>fooooo</th><th>ggooooooo</th><th data-type="number">fsdfsdaf</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>2</td></tr><tr><td>foo</td><td>bar</td><td>12345</td></tr></tbody></table>
+<table>
+    <thead>
+        <tr>
+            <th>foo</th>
+            <th>bar</th>
+            <th data-type="number">baz</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>2</td>
+            </tr>
+        <tr>
+            <td>foo</td>
+            <td>bar</td>
+            <td>12345</td>
+        </tr>
+    </tbody>
+</table>
 
 {% tabs %}
 {% tab title="First Tab" %}
