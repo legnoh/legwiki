@@ -1,4 +1,7 @@
 # Table of contents
 
 * [top](README.md)
-* [Markdown Syntax](markdown-syntax.md)
+
+## 🤖 etc
+
+* [Markdown Syntax](etc/markdown-syntax.md)

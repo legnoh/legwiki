@@ -47,11 +47,11 @@ success hint
 my code blocks
 ```
 
-{% file src="markdown-syntax/assets/hello.txt" %}
+{% file src="../markdown-syntax/assets/hello.txt" %}
 :thumbsup:
 {% endfile %}
 
-![this is img captions.](markdown-syntax/assets/photo.jpeg)
+![this is img captions.](../markdown-syntax/assets/photo.jpeg)
 
 {% embed url="https://www.youtube.com/watch?v=DCkmCWi6was" %}
 
@@ -103,8 +103,8 @@ descriptions
 {% endswagger-response %}
 {% endswagger %}
 
-{% content-ref url="markdown-syntax/page-2/" %}
-[page-2](markdown-syntax/page-2/)
+{% content-ref url="../markdown-syntax/page-2/" %}
+[page-2](../markdown-syntax/page-2/)
 {% endcontent-ref %}
 
 {% embed url="https://docs.google.com/spreadsheets/d/1S-K6DI1E8WNUKTkahDflnsVrTa0_pkcT1jtq3Zdtw9Q/edit#gid=0" %}
