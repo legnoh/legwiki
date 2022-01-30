@@ -4,4 +4,4 @@
 
 ### etc
 
-* [Markdown Syntax](contents/markdown-syntax/README.md)
+* [Syntax](contents/markdown-syntax/README.md)
