@@ -4,4 +4,4 @@
 
 ## 🤖 etc
 
-* [Markdown Syntax](etc/markdown-syntax.md)
+* [Syntax](etc/markdown-syntax.md)
