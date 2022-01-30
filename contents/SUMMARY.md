@@ -4,4 +4,4 @@
 
 ## etc
 
-* [Syntax](etc/markdown-syntax.md)
+* [Syntax](etc/markdown-syntax/README.md)
