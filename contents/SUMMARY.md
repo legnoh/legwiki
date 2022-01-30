@@ -1,6 +1,6 @@
 # Table of contents
 
-* [top](README.md)
+* [Top](README.md)
 
 ## etc
 
