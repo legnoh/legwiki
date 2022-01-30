@@ -1,5 +1,7 @@
 # Markdown Syntax
 
+# Markdown Syntax
+
 ## Header 1
 
 ### Header2
