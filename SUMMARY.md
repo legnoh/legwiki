@@ -2,4 +2,4 @@
 
 * [Top](contents/README.md)
 * etc
-** [Markdown Syntax](contents/markdown-syntax/README.md)
+    * [Markdown Syntax](contents/markdown-syntax/README.md)
