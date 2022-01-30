@@ -47,11 +47,11 @@ success hint
 my code blocks
 ```
 
-{% file src="../.gitbook/assets/hello (1).txt" %}
+{% file src="assets/hello.txt" %}
 :thumbsup:
 {% endfile %}
 
-![this is img captions.](../.gitbook/assets/534594FD-2314-4664-BA15-70EC31F69021\_1\_201\_a.jpeg)
+![this is img captions.](assets/photo.jpeg)
 
 {% embed url="https://www.youtube.com/watch?v=DCkmCWi6was" %}
 
