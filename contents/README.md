@@ -12,6 +12,8 @@ description: 緊急避難用
 * LINE: legnoh
 * Mail: [legnoh@lkj.io](mailto:legnoh@lkj.io)
 * Mastodon: [https://mastodon.cloud/@legnoh](https://mastodon.cloud/@legnoh)
+* Nintendo: SW-5204-9953-3315
 * Twitch: [https://www.twitch.tv/legnoh](https://www.twitch.tv/legnoh)
 * Twitter: [https://twitter.com/legnoh](https://twitter.com/legnoh)
 * YouTube: [https://www.youtube.com/@legnoh](https://www.youtube.com/@legnoh)
+* 駅メモ！ : USGNLJ1546
