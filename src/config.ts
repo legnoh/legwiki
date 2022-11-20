@@ -47,7 +47,7 @@ export type Sidebar = Record<
 >;
 export const SIDEBAR: Sidebar = {
 	ja: {
-		'Home': [
+		'': [
 			{ text: 'Top', link: 'ja/top' },
 		],
 	},
