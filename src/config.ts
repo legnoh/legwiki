@@ -36,9 +36,9 @@ export const GITHUB_EDIT_URL = `https://github.com/legnoh/legwiki/tree/main`;
 
 // See "Algolia" section of the README for more information.
 export const ALGOLIA = {
-	indexName: 'XXXXXXXXXX',
-	appId: 'XXXXXXXXXX',
-	apiKey: 'XXXXXXXXXX',
+	indexName: 'legwiki',
+	appId: 'VYHLYZJSKC',
+	apiKey: 'c68e31d72883dd00777aa057fab0c4be',
 };
 
 export type Sidebar = Record<
