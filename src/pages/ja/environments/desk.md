@@ -1,7 +1,7 @@
 ---
 title: デスク周辺
 description: デスク周辺の構築コンセプト、利用しているデバイスなどについてまとめています。
-layout: ../../layouts/MainLayout.astro
+layout: ../../../layouts/MainLayout.astro
 ---
 
 これまでも何度か投稿していたWFHなデスク構成についてだが、自分の中でおおよそ完成になったと思えたので改めて構成を書いておく。
