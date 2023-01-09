@@ -3,7 +3,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/07c8a332-af20-42fb-9ecd-d6a623442c82/deploy-status)](https://app.netlify.com/sites/legwiki/deploys)
 
-:cherry_blossom: [**leglog.lkj.io**](https://leglog.lkj.io) ([leglog.netlify.app](https://leglog.netlify.app))
+:cherry_blossom: [**legwiki.lkj.io**](https://legwiki.lkj.io) ([legwiki.netlify.app](https://legwiki.netlify.app))
 
 ## build
 
