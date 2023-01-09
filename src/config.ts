@@ -22,6 +22,7 @@ export type Frontmatter = {
 	dir?: 'ltr' | 'rtl';
 	ogLocale?: string;
 	lang?: string;
+	date?: string;
 };
 
 export const KNOWN_LANGUAGES = {
@@ -32,7 +33,7 @@ export const KNOWN_LANGUAGE_CODES = Object.values(KNOWN_LANGUAGES);
 
 export const GITHUB_EDIT_URL = `https://github.com/legnoh/legwiki/tree/main`;
 
-// export const COMMUNITY_INVITE_URL = `https://astro.build/chat`;
+export const COMMUNITY_INVITE_URL = `https://twitter.com/legnoh`;
 
 // See "Algolia" section of the README for more information.
 export const ALGOLIA = {
@@ -48,7 +49,8 @@ export type Sidebar = Record<
 export const SIDEBAR: Sidebar = {
 	ja: {
 		'': [
-			{ text: 'Top', link: 'ja/top' },
+			{ text: 'Whoami', link: 'ja/whoami' },
+			{ text: 'Blog', link: 'ja/blog' }
 		],
 	},
 };

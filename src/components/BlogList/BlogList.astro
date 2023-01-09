@@ -1,0 +1,19 @@
+---
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const posts = (await Astro.glob('../../pages/ja/blog/posts/*.{md,mdx}')).sort(
+	(a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+---
+
+<ul>
+    {
+        posts.map((post) => (
+            <li>
+                <time datetime={post.frontmatter.date}>
+                    {new Date(post.frontmatter.date).toISOString().split('T')[0]}
+                </time>
+                <a href={post.url}>{post.frontmatter.title}</a>
+            </li>
+        ))
+    }
+</ul>

@@ -1,0 +1,10 @@
+---
+type Props = {
+	instagramId: string;
+};
+const { instagramId } = Astro.props as Props;
+const instagramUrl = `https://instagram.com/p/${instagramId}`
+---
+<blockquote class="instagram-media" data-instgrm-permalink={instagramUrl} data-instgrm-version="12">
+<a href={instagramUrl} target="_blank">Instagram</a>
+</blockquote>

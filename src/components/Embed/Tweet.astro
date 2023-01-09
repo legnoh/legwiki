@@ -1,0 +1,8 @@
+---
+type Props = {
+	tweetLink: string;
+};
+const { tweetLink } = Astro.props as Props;
+---
+<blockquote class="twitter-tweet"><a href={tweetLink}></a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
