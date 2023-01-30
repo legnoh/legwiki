@@ -161,7 +161,7 @@
     vscode-languageserver-types "^3.17.1"
     vscode-uri "^3.0.3"
 
-"@astrojs/markdown-remark@^2.0.0", "@astrojs/markdown-remark@^2.0.1":
+"@astrojs/markdown-remark@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@astrojs/markdown-remark/-/markdown-remark-2.0.1.tgz#48ecc33dde9231eb20df274e87099552834c4a1f"
   integrity sha512-xQF1rXGJN18m+zZucwRRtmNehuhPMMhZhi6HWKrtpEAKnHSPk8lqf1GXgKH7/Sypglu8ivdECZ+EGs6kOYVasQ==
@@ -180,12 +180,12 @@
     unist-util-visit "^4.1.0"
     vfile "^5.3.2"
 
-"@astrojs/mdx@^0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@astrojs/mdx/-/mdx-0.15.0.tgz#bbab44672929009fdbacf2fe31ba20e151012a17"
-  integrity sha512-KABnoWZJdtmzlbTbCJKLHRfX6fM9PS+BjSUSq/OHlkkejPUlmrZvGbDdN0Yfw1/gY/KDP48L7BLy/9VAk5Y/Wg==
+"@astrojs/mdx@^0.15.2":
+  version "0.15.2"
+  resolved "https://registry.yarnpkg.com/@astrojs/mdx/-/mdx-0.15.2.tgz#4adf3d3a12b4a7d6a6f07b21ff2bf60cfbf7b945"
+  integrity sha512-vrv1fw5kLZqaV0FHr6IKR46Rq5DENHhqUVZIXpAbvpRG/qXxHpg9QVN9ji+3bgLDKvG2Yz4wi8CYvSjmUtJHBQ==
   dependencies:
-    "@astrojs/markdown-remark" "^2.0.0"
+    "@astrojs/markdown-remark" "^2.0.1"
     "@astrojs/prism" "^2.0.0"
     "@mdx-js/mdx" "^2.1.2"
     "@mdx-js/rollup" "^2.1.1"
