@@ -1,0 +1,104 @@
+---
+// https://pub-docs.valuecommerce.ne.jp/docs/as-63-item-api/#%E7%AC%AC3%E7%AB%A0%EF%BC%9A%E5%95%86%E5%93%81api%E3%83%AA%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9%E3%82%AC%E3%82%A4%E3%83%89
+type Props = {
+	keyword: string;
+};
+const { keyword } = Astro.props as Props;
+
+const vcApiUrl = 'https://webservice.valuecommerce.ne.jp/productdb/search'
+
+const params = {
+    token: import.meta.env.SECRET_VALUECOMMERCE_TOKEN,
+    keyword: `${keyword}`,
+    format: 'json',
+};
+
+const response = await fetch( vcApiUrl + '?' + new URLSearchParams(params));
+const data = await response.json();
+console.log(data)
+const item = data.items[0];
+const img = data.items[0].imageLarge;
+---
+
+<style>
+    .affiliate-box {
+      border: thin solid #484848;
+      line-height:2;
+      text-align:center;
+      border-radius:10px;
+      padding: 15px;
+      display: grid;
+      grid-template-rows: 100px 50px;
+      grid-template-columns: 150px 1fr;
+      max-width: 
+    }
+
+    .valuecommerce-item-img {
+      padding: 3px;
+      grid-row: 1 / 3;
+    grid-column: 1 / 2;
+    }
+
+    .valuecommerce-item-title {
+      font-weight: 500;
+      text-align: left;
+      grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    }
+
+    .btn--amazon,
+    a.btn--amazon {
+      color: #fff;
+      background-color: #eb6100;
+      grid-row: 2 / 3;
+      grid-column: 2 / 3;
+    }
+
+    .btn--amazon:hover,
+    a.btn--amazon:hover {
+      color: #fff;
+      background: #f56500;
+      grid-row: 2 / 3;
+      grid-column: 2 / 3;
+    }
+
+    .btn--yahoo,
+    a.btn--yahoo {
+      color: #fff;
+      background-color: #eb6100;
+      grid-row: 2 / 3;
+      grid-column: 3 / 4;
+    }
+
+    .btn--yahoo:hover,
+    a.btn--yahoo:hover {
+      color: #fff;
+      background: #f56500;
+      grid-row: 2 / 3;
+      grid-column: 3 / 4;
+    }
+
+    .btn--rakuten,
+    a.btn--rakuten {
+      color: #fff;
+      background-color: #eb6100;
+      grid-row: 2 / 3;
+      grid-column: 4 / 5;
+    }
+
+    .btn--rakuten:hover,
+    a.btn--rakuten:hover {
+      color: #fff;
+      background: #f56500;
+      grid-row: 2 / 3;
+      grid-column: 4 / 5;
+    }
+</style>
+
+<div class="affiliate-box">
+    <img class="valuecommerce-item-img" src={img.url} height={img.height} width={img.width}>
+    <p class="valuecommerce-item-title">{item.title}</p>
+    <!-- <a href={item.link} class="btn btn--amazon" target="_blank">Amazon</a>
+    <a href={item.link} class="btn btn--yahoo" target="_blank">Yahoo!</a>
+    <a href={item.link} class="btn btn--rakuten" target="_blank">楽天</a> -->
+</div>
