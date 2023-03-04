@@ -1,4 +1,4 @@
-name: weekly-tasks
+name: Create this week's blog PR
 on:
   workflow_dispatch:
   schedule:
