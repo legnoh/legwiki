@@ -30,7 +30,7 @@ erb from_date=${from_date} \
     src/templates/blog/post.mdx.erb > ${post_dir}/${slug}.mdx
 
 # set env in global(GitHub Actions)
-if [[ "$GITHUB_ACTION" == true ]]; then
+if [ -n "${GITHUB_ACTION}" ]; then
     echo "from_date=${from_date}" >> $GITHUB_ENV
     echo "to_date=${to_date}" >> $GITHUB_ENV
     echo "slug=${slug}" >> $GITHUB_ENV
