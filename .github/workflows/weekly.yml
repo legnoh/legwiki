@@ -41,7 +41,7 @@ jobs:
           - :money_with_wings: [Expenses - MoneyForward](https://moneyforward.com/cf)
           - :bookmark_tabs: [My Bookmark - Hatena Bookmark](https://b.hatena.ne.jp/Ryo_K/bookmark)
           - :drop_of_blood: [Timeline - Withings Health Mate](https://healthmate.withings.com/timeline)
-          - :sun: [Weather forecast - OpenWeatherMap](https://openweathermap.org/city/1850144)
+          - :sun_with_face: [Weather forecast - OpenWeatherMap](https://openweathermap.org/city/1850144)
         labels: posts
         assignees: legnoh
         branch: ${{ env.slug }}
