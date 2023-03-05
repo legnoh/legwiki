@@ -1,0 +1,19 @@
+name: auto-merge
+
+on:
+  pull_request:
+
+jobs:
+  auto-merge:
+    name: enable auto-merge of dependabot
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Auto merge dependabot's PR
+        uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          github-token: ${{ secrets.AUTOMERGE_GITHUB_TOKEN }}
+          target: patch
