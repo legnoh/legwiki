@@ -15,7 +15,7 @@
     "@astrojs/mdx": "^0.18.0",
     "@astrojs/preact": "^2.1.0",
     "@astrojs/react": "^2.1.0",
-    "@astrojs/sitemap": "^1.1.0",
+    "@astrojs/sitemap": "^1.2.0",
     "@docsearch/css": "^3.3.3",
     "@docsearch/react": "^3.3.3",
     "@types/node": "^18.14.6",
