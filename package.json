@@ -19,7 +19,7 @@
     "@docsearch/css": "^3.3.3",
     "@docsearch/react": "^3.3.3",
     "@types/node": "^18.15.11",
-    "@types/react": "^18.0.31",
+    "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",
     "astro": "^2.1.8",
     "preact": "^10.13.2",
