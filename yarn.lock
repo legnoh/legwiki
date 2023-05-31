@@ -218,20 +218,20 @@
     unist-util-visit "^4.1.0"
     vfile "^5.3.2"
 
-"@astrojs/mdx@^0.19.4":
-  version "0.19.4"
-  resolved "https://registry.yarnpkg.com/@astrojs/mdx/-/mdx-0.19.4.tgz#a8d307853d60f19a3f53b97cc7f54edae33b3fe4"
-  integrity sha512-+xT4YiUmOXwBqZ2zr74M7lznJ8wg6Q1Be534fJq24ozRxlkwEM6Qj/h9s3oSk6CwV7DuEf6KosRR0ltWE/OxJg==
+"@astrojs/mdx@^0.19.5":
+  version "0.19.5"
+  resolved "https://registry.yarnpkg.com/@astrojs/mdx/-/mdx-0.19.5.tgz#8f392df691c21f25535dc8afa4daeecbc2b1f3c1"
+  integrity sha512-x+zmrvvEonZPDhDkeALfhizrg6pMllo6Q259GrIxayOkFMtpyxIwWoI3tGv9Z0SaSZfesa0MmDpgGA3IORsXrw==
   dependencies:
     "@astrojs/markdown-remark" "^2.2.1"
     "@astrojs/prism" "^2.1.2"
     "@mdx-js/mdx" "^2.3.0"
-    "@mdx-js/rollup" "^2.3.0"
     acorn "^8.8.0"
     es-module-lexer "^1.1.1"
     estree-util-visit "^1.2.0"
     github-slugger "^1.4.0"
     gray-matter "^4.0.3"
+    hast-util-to-html "^8.0.4"
     kleur "^4.1.4"
     rehype-raw "^6.1.1"
     remark-frontmatter "^4.0.1"
@@ -704,7 +704,7 @@
   resolved "https://registry.yarnpkg.com/@ljharb/has-package-exports-patterns/-/has-package-exports-patterns-0.0.2.tgz#c1718939b65efa1f45f53686c2fcfa992b9fb68f"
   integrity sha512-4/RWEeXDO6bocPONheFe6gX/oQdP/bEpv0oL4HqjPP5DCenBSt0mHgahppY49N0CpsaqffdwPq+TlX9CYOq2Dw==
 
-"@mdx-js/mdx@^2.0.0", "@mdx-js/mdx@^2.3.0":
+"@mdx-js/mdx@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-2.3.0.tgz#d65d8c3c28f3f46bb0e7cb3bf7613b39980671a9"
   integrity sha512-jLuwRlz8DQfQNiUCJR50Y09CGPq3fLtmtUQfVrj79E0JWu3dvsVcxVIcfhR5h0iXu+/z++zDrYeiJqifRynJkA==
@@ -725,16 +725,6 @@
     unist-util-position-from-estree "^1.0.0"
     unist-util-stringify-position "^3.0.0"
     unist-util-visit "^4.0.0"
-    vfile "^5.0.0"
-
-"@mdx-js/rollup@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@mdx-js/rollup/-/rollup-2.3.0.tgz#9dbdfc64e3ce4a1af041da963e1cb6f2b6450cbf"
-  integrity sha512-wLvRfJS/M4UmdqTd+WoaySEE7q4BIejYf1xAHXYvtT1du/1Tl/z2450Gg2+Hu7fh05KwRRiehiTP9Yc/Dtn0fA==
-  dependencies:
-    "@mdx-js/mdx" "^2.0.0"
-    "@rollup/pluginutils" "^5.0.0"
-    source-map "^0.7.0"
     vfile "^5.0.0"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -781,15 +771,6 @@
   integrity sha512-N09DuAVvc90bBZVRwD+aFhtGyHAmJLhS3IFoawO/bYJRcil4k83nBOchpCEoS0s5+BXBpahgp0Mjf+IOqP57Og==
   dependencies:
     "@preact/signals-core" "^1.2.3"
-
-"@rollup/pluginutils@^5.0.0":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-5.0.2.tgz#012b8f53c71e4f6f9cb317e311df1404f56e7a33"
-  integrity sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==
-  dependencies:
-    "@types/estree" "^1.0.0"
-    estree-walker "^2.0.2"
-    picomatch "^2.3.1"
 
 "@types/acorn@^4.0.0":
   version "4.0.6"
@@ -1568,11 +1549,6 @@ estree-walker@3.0.0:
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-3.0.0.tgz#ca4b284de9dffb255288c76a44870b360faf14f9"
   integrity sha512-s6ceX0NFiU/vKPiKvFdR83U1Zffu7upwZsGwpoqfg5rbbq1l50WQ5hCeIvM6E6oD4shUHCYMsiFPns4Jk0YfMQ==
 
-estree-walker@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
-  integrity sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==
-
 estree-walker@^3.0.0:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-3.0.2.tgz#2d17ff18067683aaf97aed83fe0d300603db9b67"
@@ -1865,7 +1841,7 @@ hast-util-to-estree@^2.0.0:
     unist-util-position "^4.0.0"
     zwitch "^2.0.0"
 
-hast-util-to-html@^8.0.0:
+hast-util-to-html@^8.0.0, hast-util-to-html@^8.0.4:
   version "8.0.4"
   resolved "https://registry.yarnpkg.com/hast-util-to-html/-/hast-util-to-html-8.0.4.tgz#0269ef33fa3f6599b260a8dc94f733b8e39e41fc"
   integrity sha512-4tpQTUOr9BMjtYyNlt0P50mH7xj0Ks2xpo8M943Vykljf99HW6EzulIoJP1N3eKOSScEHzyzi9dm7/cn0RfGwA==
