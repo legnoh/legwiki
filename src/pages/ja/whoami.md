@@ -12,6 +12,7 @@ layout: ../../layouts/MainLayout.astro
 * LINE: legnoh
 * Mail: [legnoh@lkj.io](mailto:legnoh@lkj.io)
 * Mastodon: [https://mastodon.cloud/@legnoh](https://mastodon.cloud/@legnoh)
+* Misskey: [https://misskey.io/@legnoh](https://misskey.io/@legnoh)
 * Nintendo: SW-5204-9953-3315
 * Twitch: [https://www.twitch.tv/legnoh](https://www.twitch.tv/legnoh)
 * Twitter: [https://twitter.com/legnoh](https://twitter.com/legnoh)
