@@ -5,6 +5,7 @@ layout: ../../layouts/MainLayout.astro
 ---
 
 * Blog: [https://leglog.lkj.io/](https://leglog.lkj.io/)
+* Bluesky: [https://bsky.app/profile/legnoh.bsky.social](https://bsky.app/profile/legnoh.bsky.social)
 * Discord: legnoh#1816
 * Facebook: [https://www.facebook.com/legnoh/](https://www.facebook.com/legnoh/)
 * GitHub: [https://github.com/legnoh](https://github.com/legnoh)
