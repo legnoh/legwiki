@@ -15,7 +15,9 @@ layout: ../../layouts/MainLayout.astro
 * Mastodon: [https://mastodon.cloud/@legnoh](https://mastodon.cloud/@legnoh)
 * Misskey: [https://misskey.io/@legnoh](https://misskey.io/@legnoh)
 * Nintendo: SW-5204-9953-3315
+* Threads: [https://www.threads.net/@legnoh](https://www.threads.net/@legnoh)
 * Twitch: [https://www.twitch.tv/legnoh](https://www.twitch.tv/legnoh)
 * Twitter: [https://twitter.com/legnoh](https://twitter.com/legnoh)
 * YouTube: [https://www.youtube.com/@legnoh](https://www.youtube.com/@legnoh)
-* 駅メモ！ : USGNLJ1546
+* ウマ娘: [363668256](https://uma.pure-db.com/#/user/363668256)
+* 駅メモ！: USGNLJ1546
