@@ -15,6 +15,7 @@ layout: ../../layouts/MainLayout.astro
 * Mastodon: [https://mastodon.cloud/@legnoh](https://mastodon.cloud/@legnoh)
 * Misskey: [https://misskey.io/@legnoh](https://misskey.io/@legnoh)
 * Nintendo: SW-5204-9953-3315
+* Qiita: [https://qiita.com/legnoh](https://qiita.com/legnoh)
 * Threads: [https://www.threads.net/@legnoh](https://www.threads.net/@legnoh)
 * Twitch: [https://www.twitch.tv/legnoh](https://www.twitch.tv/legnoh)
 * Twitter: [https://twitter.com/legnoh](https://twitter.com/legnoh)
