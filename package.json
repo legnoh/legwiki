@@ -20,7 +20,7 @@
     "@docsearch/react": "^3.5.1",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
-    "@types/react-dom": "^18.2.6",
+    "@types/react-dom": "^18.2.7",
     "astro": "^2.8.1",
     "preact": "^10.16.0",
     "react": "^18.1.0",
