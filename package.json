@@ -21,7 +21,7 @@
     "@types/node": "^20.5.4",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
-    "astro": "^2.10.12",
+    "astro": "^2.10.13",
     "preact": "^10.17.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0"
