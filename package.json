@@ -18,7 +18,7 @@
     "@astrojs/sitemap": "^2.0.2",
     "@docsearch/css": "^3.5.2",
     "@docsearch/react": "^3.5.2",
-    "@types/node": "^20.5.6",
+    "@types/node": "^20.5.7",
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "astro": "^2.10.14",
