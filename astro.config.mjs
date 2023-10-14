@@ -37,7 +37,7 @@ export default defineConfig({
         './src/styles/custom.css',
 			],
       editLink: {
-				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/src/content/docs/',
+				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/',
 			},
       defaultLocale: 'ja',
       sidebar: [
