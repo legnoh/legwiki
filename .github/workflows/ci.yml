@@ -7,7 +7,7 @@ on:
 
 jobs:
     build:
-        runs-on: macos-13-xlarge
+        runs-on: macos-13-xlarge # pagefind not working on x64 architecture
         steps:
         - uses: actions/checkout@v4
           with:
