@@ -9,7 +9,7 @@ description: 私について
 
 ---
 
-- Blog: [https://leglog.lkj.io/](https://leglog.lkj.io/)
+- Blog: [https://legwiki.lkj.io/blog/](https://legwiki.lkj.io/blog/)
 - Bluesky: [https://bsky.app/profile/legnoh.bsky.social](https://bsky.app/profile/legnoh.bsky.social)
 - Discord: @legnoh (legacy: legnoh#1816)
 - Facebook: [https://www.facebook.com/legnoh/](https://www.facebook.com/legnoh/)
