@@ -1,19 +1,56 @@
 import { defineConfig } from 'astro/config';
-import preact from '@astrojs/preact';
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
+import starlight from "@astrojs/starlight";
+import starlightBlog from 'starlight-blog';
 
-// https://astro.build/config
-import sitemap from "@astrojs/sitemap";
-
-// https://astro.build/config
 export default defineConfig({
+  site: 'https://legwiki.lkj.io',
   integrations: [
-  // Enable Preact to support Preact JSX components.
-  preact(),
-  // Enable React for the Algolia search component.
-  react(),
-  // enable mdx format
-  mdx(), sitemap()],
-  site: `https://legwiki.lkj.io/`
+    starlightBlog({
+      title: "leglog",
+      authors: {
+        hideoo: {
+          name: 'legnoh',
+          title: 'Internet seniors\' association',
+          picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
+          url: 'https://twitter.com/legnoh',
+        },
+      },
+      postCount: 1,
+      recentPostCount: 1000,
+    }),
+    starlight({
+      title: "legwiki",
+      description: "compass for myself.",
+      logo: {
+        light: "./src/assets/legwiki-logo-light-side.svg",
+        dark: "./src/assets/legwiki-logo-dark-side.svg",
+        replacesTitle: true,
+      },
+      components: {
+        MarkdownContent: './src/components/Markdown/MarkdownTemplate.astro',
+        Sidebar: 'starlight-blog/overrides/Sidebar.astro',
+        ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
+      },
+      customCss: [
+				'@fontsource/noto-sans-jp/400.css',
+        '@fontsource/noto-sans-jp/600.css',
+        './src/styles/custom.css',
+			],
+      editLink: {
+				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/src/content/docs/',
+			},
+      defaultLocale: 'ja',
+      sidebar: [
+        { label: 'About', link: '/about' },
+        { label: 'Whoami', link: '/whoami' },
+      ],
+      social: {
+        'x.com': 'https://twitter.com/legnoh',
+        instagram: 'https://www.instagram.com/legnoh/',
+        youtube: 'https://www.youtube.com/@legnoh',
+        github: 'https://github.com/legnoh',
+        rss: 'https://legwiki.lkj.io/atom.xml',
+      },
+    }),
+  ],
 });

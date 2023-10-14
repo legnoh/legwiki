@@ -1,7 +1,3 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "skipLibCheck": true
-  }
+  "extends": "astro/tsconfigs/strict"
 }

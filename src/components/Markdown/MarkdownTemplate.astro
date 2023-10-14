@@ -1,0 +1,11 @@
+---
+import Default from 'starlight-blog/overrides/MarkdownContent.astro';
+import type { Props } from '@astrojs/starlight/props'
+import LinkSwitch from '../Affiliate/LinkSwitch.astro'
+---
+
+<LinkSwitch/>
+
+<Default {...Astro.props}>
+    <slot/>
+</Default>
