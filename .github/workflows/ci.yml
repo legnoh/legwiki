@@ -10,6 +10,8 @@ jobs:
         runs-on: macos-13-xlarge
         steps:
         - uses: actions/checkout@v4
+          with:
+            lfs: true
         - uses: actions/setup-node@v3
           with:
             node-version: 18
