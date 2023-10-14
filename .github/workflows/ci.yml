@@ -6,22 +6,26 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
-    - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v2.1
-      with:
-        publish-dir: './dist'
-        production-deploy: false
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    build:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-node@v3
+          with:
+            node-version: 18
+            cache: 'npm'
+        - name: Run npm ci
+          run: npm install --include=dev
+        - name: Run astro check
+          run: npm run check
+        - name: Run astro build
+          run: npm run build
+        - name: Deploy to Netlify
+          uses: nwtgck/actions-netlify@v2.1
+          with:
+            publish-dir: './dist'
+            production-deploy: true
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+          env:
+            NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+            NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

@@ -14,7 +14,10 @@ jobs:
           with:
             node-version: 18
             cache: 'npm'
-        - run: npm ci
+        - name: Run npm ci
+          run: npm ci
+        - name: Run astro build
+          run: npm run build
         - name: Deploy to Netlify
           uses: nwtgck/actions-netlify@v2.1
           with:

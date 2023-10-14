@@ -1,4 +1,4 @@
-import { i18nSchema } from '@astrojs/starlight/schema'
+// import { i18nSchema } from '@astrojs/starlight/schema'
 import { defineCollection } from 'astro:content'
 import { docsAndBlogSchema } from 'starlight-blog/schema'
 
