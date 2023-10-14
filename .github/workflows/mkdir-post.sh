@@ -16,8 +16,8 @@ week=$(date +%U --date "${sunday}")
 slug=${year}-${week}
 to_date=$(date '+%Y-%m-%d' --date "${sunday}")
 from_date=$(date '+%Y-%m-%d' --date "6 day ago ${to_date}")
-post_dir=src/pages/ja/blog/posts
-image_dir=public/ja/blog/posts/${slug}
+post_dir=src/content/docs/blog
+image_dir=public/img/blog/${slug}
 
 # mkdir, hero alias
 mkdir -p ${image_dir}
