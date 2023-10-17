@@ -45,6 +45,7 @@ jobs:
         labels: posts
         assignees: legnoh
         branch: ${{ env.slug }}
+        token: ${{ secrets.WRITABLE_TOKEN }}
     - name: Create Codespace for PullRequest
       run: |
         source .github/workflows/github_api.sh
