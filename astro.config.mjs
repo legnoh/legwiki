@@ -27,7 +27,7 @@ export default defineConfig({
         replacesTitle: true,
       },
       components: {
-        MarkdownContent: './src/components/Markdown/MarkdownTemplate.astro',
+        MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
         Sidebar: 'starlight-blog/overrides/Sidebar.astro',
         ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
       },
