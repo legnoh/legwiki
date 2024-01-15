@@ -14,7 +14,7 @@
     "@astrojs/starlight": "^0.15.3",
     "@fontsource/noto-sans-jp": "^5.0.17",
     "astro": "^4.1.2",
-    "sharp": "^0.33.1",
+    "sharp": "^0.33.2",
     "starlight-blog": "^0.4.0"
   },
   "devDependencies": {
