@@ -10,7 +10,7 @@ on:
 
 jobs:
   nightly:
-    name: Deploy nightly
+    name: delete empty codespaces
     runs-on: ubuntu-latest
     steps:
       - name: Deploy Empty Codespace
