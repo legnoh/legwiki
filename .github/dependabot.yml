@@ -3,10 +3,12 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
       time: "04:00" # 13:00(UTC+9)
+      day: monday
   - package-ecosystem: npm
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
       time: "04:00" # 13:00(UTC+9)
+      day: monday
