@@ -11,9 +11,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.17.4",
+    "@astrojs/starlight": "^0.13.0",
     "@fontsource/noto-sans-jp": "^5.0.17",
-    "astro": "^4.3.5",
     "sharp": "^0.33.2",
     "starlight-blog": "^0.4.0"
   },
