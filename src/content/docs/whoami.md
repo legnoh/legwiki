@@ -1,6 +1,7 @@
 ---
 title: whoami
 description: 私について
+date: 2000-01-01
 ---
 
 - HN: れぐの

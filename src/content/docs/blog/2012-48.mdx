@@ -11,7 +11,7 @@ import ValueCommerce from '../../../components/Affiliate/ValueCommerce.astro';
 初めて使うFlashとas3に悪戦苦闘中…。
 XMLをパースしてその一件目のタイトルをTextFieldで表示するプログラムを作っていたが、これだけで２日くらいハマったのでメモ。
 
-```
+```actionscript-3
 public class Main extends Sprite {
 	
 	private var text_field:TextField;
@@ -53,7 +53,7 @@ public class Main extends Sprite {
 
 これで回したら、text_field.text = xml.Result[0].Title;　の部分にて、そんなプロパティねーよのエラーが発生。
 
-```
+```actionscript-3
 TypeError: Error #1010: A term is undefined and has no properties.
 	at Function/<anonymous>()[/Users/HAL/Code/Legdoxea/Main.as:234]
 	at flash.events::EventDispatcher/dispatchEventFunction()
@@ -78,7 +78,7 @@ TypeError: Error #1010: A term is undefined and has no properties.
 
 `xmlns:xsi`の方は、
 
-```
+```actionscript-3
 removeNamespace("http://www.w3.org/2001/XMLSchema-instance");
 ```
 
@@ -86,11 +86,11 @@ removeNamespace("http://www.w3.org/2001/XMLSchema-instance");
 
 だが、`xmlns` の方は、これでは取り除くことができないので、この名前空間を [デフォルトの名前空間に設定](http://livedocs.adobe.com/flex/3_jp/html/help.html?content=13_Working_with_XML_09.html) してしまうことにする。
 
-```
+```actionscript-3
 default xml namespace = new Namespace("urn:yahoo:jp:srch");
 ```
 
-```
+```actionscript-3
 public class Main extends Sprite {
 	
 	private var text_field:TextField;

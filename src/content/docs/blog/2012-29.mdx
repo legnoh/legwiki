@@ -80,7 +80,7 @@ php_admin_flag engine off
 
 まず [MediaWiki公式のエクスポートページ](http://www.mediawiki.org/wiki/Special:Export) に行き、四角の大きなテキストボックスに以下を入力後、Exportボタンを押す。
 
-```
+```txt
 Help:Contents/ja
 Help:Navigation/ja
 Help:Searching/ja
@@ -209,6 +209,7 @@ $ ./install-tl
 
 以降は対話形式のインストール画面になる。
 各言語のドキュメントを対象外にすると200MB程度の容量削減になるのでやっておく。
+
 ```sh
 Enter command: l
 Enter letter(s) to select language(s): ABCDEFGHIJKLMNOPSTUVWXY
@@ -239,7 +240,7 @@ sh: latex: command not found
 と返されて実行することができない。
 CentOSの場合は、/etc/sysconfig/httpd にApache用の環境変数設定ファイルがあるので、このファイルの末尾に以下をまるっと追加する。
 
-```
+```sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/local/texlive/2012/bin/x86_64-linux
 MANPATH=/usr/local/texlive/2012/texmf/doc/man
 INFOPATH=/usr/local/texlive/2012/texmf/doc/info
@@ -274,7 +275,7 @@ MediaWikiに [Extension:Math](http://www.mediawiki.org/wiki/Extension:Math) を�
 
 `math` フォルダでコンパイルを行うと `texvc` のバイナリが３つ生成される。(`texvc`, `texvc_test`, `texvc_tex`)
 
-```
+```sh
 # cd var/www/html/wiki/extensions/Math/math
 # make
 ```
@@ -333,7 +334,7 @@ $wgTexvc = ''''/usr/local/bin/texvc'''';
 
 これで数式が見れるようになっているはず。試しに以下を入力してみると出力が可能になるはずだ。
 
-```
+```xml
 <math>\sum_{n=0}^\infty \frac{x^n}{n!}</math>;
 ```
 
