@@ -8,7 +8,7 @@ export default defineConfig({
     starlightBlog({
       title: "leglog",
       authors: {
-        hideoo: {
+        legnoh: {
           name: 'legnoh',
           title: 'Internet seniors\' association',
           picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
@@ -26,6 +26,16 @@ export default defineConfig({
         dark: "./src/assets/legwiki-logo-dark-side.svg",
         replacesTitle: true,
       },
+      head: [
+				{
+					tag: 'meta',
+					attrs: { property: 'og:image', content: site + 'legwiki-og-image.png' },
+				},
+				{
+					tag: 'meta',
+					attrs: { property: 'twitter:image', content: site + 'legwiki-og-image.png' },
+				},
+			],
       components: {
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
         Sidebar: 'starlight-blog/overrides/Sidebar.astro',
