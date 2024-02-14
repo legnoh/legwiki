@@ -8,7 +8,7 @@ export default defineConfig({
     starlightBlog({
       title: "leglog",
       authors: {
-        legnoh: {
+        hideoo: {
           name: 'legnoh',
           title: 'Internet seniors\' association',
           picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
