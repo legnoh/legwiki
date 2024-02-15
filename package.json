@@ -11,8 +11,11 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.5",
     "@astrojs/starlight": "^0.13.0",
     "@fontsource/noto-sans-jp": "^5.0.17",
+    "markdown-it": "^14.0.0",
+    "sanitize-html": "^2.11.0",
     "sharp": "^0.33.2",
     "starlight-blog": "^0.4.0"
   },

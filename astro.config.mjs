@@ -2,13 +2,21 @@ import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
 
+/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
+const VERCEL_PREVIEW_SITE =
+	process.env.VERCEL_ENV !== 'production' &&
+	process.env.VERCEL_URL &&
+	`https://${process.env.VERCEL_URL}`;
+
+const site = VERCEL_PREVIEW_SITE || 'https://legwiki.lkj.io/';
+
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
     starlightBlog({
       title: "leglog",
       authors: {
-        hideoo: {
+        legnoh: {
           name: 'legnoh',
           title: 'Internet seniors\' association',
           picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
@@ -26,6 +34,16 @@ export default defineConfig({
         dark: "./src/assets/legwiki-logo-dark-side.svg",
         replacesTitle: true,
       },
+      head: [
+				{
+					tag: 'meta',
+					attrs: { property: 'og:image', content: site + 'legwiki-og-image.png' },
+				},
+				{
+					tag: 'meta',
+					attrs: { property: 'twitter:image', content: site + 'legwiki-og-image.png' },
+				},
+			],
       components: {
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
         Sidebar: 'starlight-blog/overrides/Sidebar.astro',
@@ -49,7 +67,7 @@ export default defineConfig({
         instagram: 'https://www.instagram.com/legnoh/',
         youtube: 'https://www.youtube.com/@legnoh',
         github: 'https://github.com/legnoh',
-        rss: 'https://legwiki.lkj.io/atom.xml',
+        rss: 'https://legwiki.lkj.io/rss.xml',
       },
     }),
   ],
