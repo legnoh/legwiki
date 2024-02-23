@@ -13,19 +13,6 @@ const site = VERCEL_PREVIEW_SITE || 'https://legwiki.lkj.io/';
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
-    starlightBlog({
-      title: "leglog",
-      authors: {
-        legnoh: {
-          name: 'legnoh',
-          title: 'Internet seniors\' association',
-          picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
-          url: 'https://twitter.com/legnoh',
-        },
-      },
-      postCount: 1,
-      recentPostCount: 1000,
-    }),
     starlight({
       title: "legwiki",
       description: "compass for myself.",
@@ -58,6 +45,21 @@ export default defineConfig({
 				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/',
 			},
       defaultLocale: 'ja',
+      plugins: [
+        starlightBlog({
+          title: "leglog",
+          authors: {
+            legnoh: {
+              name: 'legnoh',
+              title: 'Internet seniors\' association',
+              picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
+              url: 'https://twitter.com/legnoh',
+            },
+          },
+          postCount: 1,
+          recentPostCount: 1000,
+        }),
+      ],
       sidebar: [
         { label: 'About', link: '/about' },
         { label: 'Whoami', link: '/whoami' },
