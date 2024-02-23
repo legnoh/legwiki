@@ -13,4 +13,4 @@ updates:
       time: "04:00" # 13:00(UTC+9)
       day: monday
     ignore:
-      - dependency-name: "starlight"
+      - dependency-name: "@astrojs/starlight"
