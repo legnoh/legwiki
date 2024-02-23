@@ -12,3 +12,5 @@ updates:
       interval: weekly
       time: "04:00" # 13:00(UTC+9)
       day: monday
+    ignore:
+      - dependency-name: "starlight"
