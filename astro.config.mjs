@@ -31,9 +31,9 @@ export default defineConfig({
 					attrs: { property: 'twitter:image', content: site + 'legwiki-og-image.png' },
 				},
 			],
-      components: {
-        MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
-      },
+      // components: {
+      //   MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
+      // },
       customCss: [
 				'@fontsource/noto-sans-jp/400.css',
         '@fontsource/noto-sans-jp/600.css',
