@@ -33,8 +33,6 @@ export default defineConfig({
 			],
       components: {
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
-        Sidebar: 'starlight-blog/overrides/Sidebar.astro',
-        ThemeSelect: 'starlight-blog/overrides/ThemeSelect.astro',
       },
       customCss: [
 				'@fontsource/noto-sans-jp/400.css',
