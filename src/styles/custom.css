@@ -1,5 +1,6 @@
 :root {
 	--sl-font: "BIZ UDPGothic", sans-serif;
+	--sl-content-width: 70rem;
 }
 
 .sl-markdown-content :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
