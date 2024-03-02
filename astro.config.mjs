@@ -35,10 +35,13 @@ export default defineConfig({
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
       },
       customCss: [
-				'@fontsource/noto-sans-jp/400.css',
-        '@fontsource/noto-sans-jp/600.css',
+        '@fontsource/biz-udpgothic',
         './src/styles/custom.css',
 			],
+      tableOfContents: {
+        minHeadingLevel: 2,
+        maxHeadingLevel: 6
+      },
       editLink: {
 				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/',
 			},
@@ -61,6 +64,14 @@ export default defineConfig({
       sidebar: [
         { label: 'About', link: '/about' },
         { label: 'Whoami', link: '/whoami' },
+        { label: '環境', link: '/environments' },
+        { 
+          label: 'リスク対応', 
+          items: [
+            {label: 'リスク評価', link: '/risk/assessment' },
+            {label: '防災対策', link: '/risk/disaster-prevention' }
+          ]
+        },
       ],
       social: {
         'x.com': 'https://twitter.com/legnoh',
