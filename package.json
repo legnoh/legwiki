@@ -19,7 +19,7 @@
     "starlight-blog": "^0.5.1"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.5.4",
+    "@astrojs/check": "^0.5.9",
     "typescript": "^5.4.2"
   }
 }
