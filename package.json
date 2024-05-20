@@ -15,7 +15,7 @@
     "@fontsource/biz-udpgothic": "^5.0.19",
     "markdown-it": "^14.1.0",
     "sanitize-html": "^2.13.0",
-    "sharp": "^0.33.3",
+    "sharp": "^0.33.4",
     "starlight-blog": "^0.8.2"
   },
   "devDependencies": {
