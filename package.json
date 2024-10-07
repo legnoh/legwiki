@@ -14,7 +14,7 @@
     "@astrojs/rss": "^4.0.6",
     "@fontsource/biz-udpgothic": "^5.1.0",
     "markdown-it": "^14.1.0",
-    "sanitize-html": "^2.13.0",
+    "sanitize-html": "^2.13.1",
     "sharp": "^0.33.5",
     "starlight-blog": "^0.13.0"
   },
