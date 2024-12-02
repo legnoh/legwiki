@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "textlint": "^14.3.0",
+    "textlint": "^14.4.0",
     "typescript": "^5.7.2"
   }
 }
