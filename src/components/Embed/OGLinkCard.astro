@@ -43,7 +43,8 @@ async function getRakutenAffiliateUrl(item_id: string) {
       keyword: item_code,
       shopCode: shop_code,
       applicationId: application_id,
-      affiliateId: affiliate_id
+      affiliateId: affiliate_id,
+      sort: '+reviewAverage'
   }).toString());
   const data = await response.json();
   if (data.count > 0) {
