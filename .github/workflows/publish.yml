@@ -20,6 +20,9 @@ jobs:
           run: npm ci
         - name: Run astro build
           run: npm run build
+          env:
+            RAKUTEN_APPLICATION_ID:  ${{ secrets.RAKUTEN_APPLICATION_ID }}
+            RAKUTEN_AFFILIATE_ID:  ${{ secrets.RAKUTEN_AFFILIATE_ID }}
         - name: Deploy to Netlify
           uses: nwtgck/actions-netlify@v3.0
           with:
