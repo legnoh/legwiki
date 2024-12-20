@@ -1,0 +1,152 @@
+---
+import ogs from 'open-graph-scraper'
+import Noimage from '../../assets/wiki/risk/assessment/risk-assessment.jpg'
+import fetch from 'node-fetch';
+
+interface Props {
+  url: string
+  title?: string
+  description?: string
+  image?: string
+  fixed?: boolean
+  url_amazon?: string
+  url_yahoo?: string
+  code_rakuten?: string
+}
+
+let { url, title, description, image, fixed, url_amazon, code_rakuten, url_yahoo } = Astro.props
+
+if (fixed == undefined) {
+  fixed = false
+}
+
+async function getOGPData(url: string) {
+  const options = { url: url, timeout: 100 }
+  try {
+    const { result } = await ogs(options)
+    console.log("fetched OGP data: "+result.ogUrl)
+    return result
+  } catch (error) {
+    console.error('Error fetching Open Graph Data:', error)
+    return {}
+  }
+}
+
+async function getRakutenAffiliateUrl(item_id: string) {
+  console.log("get rakuten affiliate url... "+ item_id)
+  const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
+  const api_url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
+  const [shop_code, item_code] = item_id.split("/")
+  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
+  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID
+  const response = await fetch(api_url + "?" + new URLSearchParams({
+      format: 'json',
+      keyword: item_code,
+      shopCode: shop_code,
+      applicationId: application_id,
+      affiliateId: affiliate_id
+  }).toString());
+  const data = await response.json();
+  await sleep(1000);
+  if (data.count > 0) {
+    return data.Items[0].Item.affiliateUrl
+  } else {
+    return null
+  }
+}
+
+const ogpdata = await getOGPData(url)
+if (fixed == false) {
+  title = ogpdata?.ogTitle || 'no title'
+  image = ogpdata?.ogImage?.[0]?.url || undefined
+  description = ogpdata?.ogDescription || undefined
+}
+
+
+let url_rakuten_affiliate = null
+if (code_rakuten != null) {
+  url_rakuten_affiliate = await getRakutenAffiliateUrl(code_rakuten)
+}
+---
+
+<div class="oglc-container">
+  <div class="oglc-content">
+    <div class="oglc-text-container">
+      <a href={url} class="oglc-title" target="_blank">{title}</a>
+      {description && <div class="oglc-description">{description}</div>}
+    </div>
+    {image && <img class="oglc-image" src={image} alt="Image" />}
+  </div>
+
+  <div class="oglc-buttons">
+    {url_amazon && <a href={url_amazon} class="oglc-btn" target="_blank">Amazon</a>}
+    {url_yahoo && <a href={url_yahoo} class="oglc-btn" target="_blank">Yahoo!</a>}
+    {code_rakuten && url_rakuten_affiliate && <a href={url_rakuten_affiliate} class="oglc-btn" target="_blank">楽天</a>}
+  </div>
+</div>
+
+<style>
+  .oglc-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #999;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 800px;
+    font-family: Arial, sans-serif;
+  }
+
+  .oglc-content {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .oglc-text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+  }
+
+  .oglc-title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .oglc-description {
+    font-size: 0.9em;
+    color: #555;
+  }
+
+  .oglc-image {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .oglc-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .oglc-btn {
+    padding: 8px 12px;
+    background-color: #0078ff;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .oglc-btn:hover {
+    background-color: #005bbf;
+  }
+</style>
