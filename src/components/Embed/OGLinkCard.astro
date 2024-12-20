@@ -33,7 +33,6 @@ async function getOGPData(url: string) {
 }
 
 async function getRakutenAffiliateUrl(item_id: string) {
-  console.log("get rakuten affiliate url... "+ item_id)
   const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
   const api_url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
   const [shop_code, item_code] = item_id.split("/")
@@ -47,10 +46,11 @@ async function getRakutenAffiliateUrl(item_id: string) {
       affiliateId: affiliate_id
   }).toString());
   const data = await response.json();
-  await sleep(1000);
   if (data.count > 0) {
+    console.log("fetched rakuten affiliate url: "+ item_id)
     return data.Items[0].Item.affiliateUrl
   } else {
+    console.log("error fetching rakuten affiliate url: "+ item_id)
     return null
   }
 }
