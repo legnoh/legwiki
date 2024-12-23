@@ -1,6 +1,5 @@
 ---
 import ogs from 'open-graph-scraper'
-import Noimage from '../../assets/wiki/risk/assessment/risk-assessment.jpg'
 import fetch from 'node-fetch';
 
 interface Props {
@@ -12,6 +11,31 @@ interface Props {
   url_amazon?: string
   url_yahoo?: string
   code_rakuten?: string
+}
+
+interface RakutenAffiliateResponse {
+  Items: Array<RakutenAffiliateItem>
+  count: number
+  first: number
+  hits: number
+  last: number
+  page: number
+  pageCount: number
+};
+
+type RakutenAffiliateItem = {
+  Item: {
+    affiliateRate: number
+    affiliateUrl: string
+    availability: number
+    catchcopy: string
+    genreId: number
+    itemCaption: string
+    itemCode: number
+    itemName: string
+    itemPrice: number
+    itemUrl: string
+  }
 }
 
 let { url, title, description, image, fixed, url_amazon, code_rakuten, url_yahoo } = Astro.props
@@ -33,7 +57,6 @@ async function getOGPData(url: string) {
 }
 
 async function getRakutenAffiliateUrl(item_id: string) {
-  const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
   const api_url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
   const [shop_code, item_code] = item_id.split("/")
   const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
@@ -46,10 +69,14 @@ async function getRakutenAffiliateUrl(item_id: string) {
       affiliateId: affiliate_id,
       sort: '+reviewAverage'
   }).toString());
-  const data = await response.json();
-  if (data.count > 0) {
+  const data = await response.text();
+  if (data == null){
+    return null
+  }
+  const json_response:RakutenAffiliateResponse = JSON.parse(data)
+  if (json_response.count > 0) {
     console.log("fetched rakuten affiliate url: "+ item_id)
-    return data.Items[0].Item.affiliateUrl
+    return json_response.Items[0].Item.affiliateUrl
   } else {
     console.log("error fetching rakuten affiliate url: "+ item_id)
     return null

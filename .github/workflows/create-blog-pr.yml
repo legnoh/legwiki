@@ -4,12 +4,15 @@ on:
   schedule:
   - cron: 0 3 * * 1
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   create-this-week-template:
     name: Make this week post's branch
     runs-on: ubuntu-latest
     steps:
-
     - name: Checkout Repository
       uses: actions/checkout@v4
 
@@ -45,7 +48,6 @@ jobs:
         labels: posts
         assignees: legnoh
         branch: ${{ env.slug }}
-        token: ${{ secrets.WRITABLE_TOKEN }}
     - name: Create Codespace for PullRequest
       run: |
         source .github/workflows/github_api.sh
