@@ -9,17 +9,6 @@ jobs:
     name: Make this week post's branch
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/create-github-app-token@v1
-      id: app-token
-      with:
-        app-id: ${{ secrets.APP_ID }}
-        private-key: ${{ secrets.APP_PRIVATE_KEY }}
-    - name: Get GitHub App User ID
-      id: get-user-id
-      run: echo "user-id=$(gh api "/users/${{ steps.app-token.outputs.app-slug }}[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
-      env:
-        GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
     - name: Checkout Repository
       uses: actions/checkout@v4
 
@@ -34,7 +23,6 @@ jobs:
       id: create-pull-request
       with:
         commit-message: "[skip ci] initialize ${{ env.slug }} blog post"
-        committer: "${{ steps.app-token.outputs.app-slug }}[bot] <${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>"
         title: "[post] ${{ env.slug }}"
         body: |
           - **target:** ${{ env.from_date }}(Mon) ~ ${{ env.to_date }}(Sun)
@@ -56,8 +44,7 @@ jobs:
         labels: posts
         assignees: legnoh
         branch: ${{ env.slug }}
-        token: ${{ steps.app-token.outputs.token }}
     - name: Create Codespace for PullRequest
       run: |
         source .github/workflows/github_api.sh
-        create_codespace_for_pr ${{ steps.app-token.outputs.token }} legnoh legwiki ${{ steps.create-pull-request.outputs.pull-request-number }}
+        create_codespace_for_pr ${{ secrets.CODESPACE_TOKEN }} legnoh legwiki ${{ steps.create-pull-request.outputs.pull-request-number }}
