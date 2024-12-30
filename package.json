@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.10",
-    "@fontsource/biz-udpgothic": "^5.1.0",
+    "@fontsource/biz-udpgothic": "^5.1.1",
     "markdown-it": "^14.1.0",
     "node-fetch": "^3.3.2",
     "open-graph-scraper": "^6.8.3",
