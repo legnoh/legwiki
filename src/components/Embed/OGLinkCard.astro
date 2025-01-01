@@ -95,7 +95,7 @@ async function getRakutenAffiliateUrl(item_id: string) {
     return json_response.Items[0].Item.affiliateUrl
   } else {
     console.log("error fetching rakuten affiliate item_id: " + item_id + " response: "+ data)
-    return null
+    return await getRakutenAffiliateUrl(item_id)
   }
 }
 
@@ -124,7 +124,7 @@ async function getRakutenKakakuNaviUrl(keyword: string) {
     return json_response.Products[0].affiliateUrl
   } else {
     console.log("error fetching rakuten affiliate(kakakunavi) keyword: " + keyword + " response: "+ data)
-    return null
+    return await getRakutenKakakuNaviUrl(keyword)
   }
 }
 
