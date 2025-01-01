@@ -2,9 +2,11 @@
 import Default from '../../../node_modules/starlight-blog/overrides/MarkdownContent.astro';
 import type { Props } from '@astrojs/starlight/props'
 import LinkSwitch from '../Affiliate/LinkSwitch.astro'
+import Xscript from '../Embed/Xscript.astro';
 ---
 
 <LinkSwitch/>
+<Xscript/>
 
 <Default {...Astro.props}>
     <slot/>

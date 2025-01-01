@@ -35,7 +35,6 @@ export default defineConfig({
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
       },
       customCss: [
-        '@fontsource/biz-udpgothic',
         './src/styles/custom.css',
 			],
       tableOfContents: {
@@ -74,7 +73,7 @@ export default defineConfig({
         },
       ],
       social: {
-        'x.com': 'https://twitter.com/legnoh',
+        'x.com': 'https://x.com/legnoh',
         instagram: 'https://www.instagram.com/legnoh/',
         youtube: 'https://www.youtube.com/@legnoh',
         github: 'https://github.com/legnoh',
