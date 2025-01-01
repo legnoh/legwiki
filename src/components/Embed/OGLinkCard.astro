@@ -1,6 +1,6 @@
 ---
 import ogs from 'open-graph-scraper'
-import fetch from 'node-fetch';
+import { setTimeout } from "node:timers/promises";
 
 interface Props {
   url: string
@@ -11,6 +11,7 @@ interface Props {
   url_amazon?: string
   url_yahoo?: string
   code_rakuten?: string
+  keyword_rakuten?: string
 }
 
 interface RakutenAffiliateResponse {
@@ -38,20 +39,31 @@ type RakutenAffiliateItem = {
   }
 }
 
-let { url, title, description, image, fixed, url_amazon, code_rakuten, url_yahoo } = Astro.props
+interface RakutenKakakuNaviItems {
+  Products: Array<RakutenKakakuNaviItem>
+  count: number
+}
+
+type RakutenKakakuNaviItem = {
+  affiliateUrl: string
+  productName: string
+}
+
+let { url, title, description, image, fixed, url_amazon, url_yahoo, code_rakuten, keyword_rakuten } = Astro.props
 
 if (fixed == undefined) {
   fixed = false
 }
 
 async function getOGPData(url: string) {
-  const options = { url: url, timeout: 100 }
+  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36';
+  const options = { url: url, timeout: 100, fetchOptions: { headers: { 'user-agent': userAgent } } }
   try {
     const { result } = await ogs(options)
     console.log("fetched OGP data: "+result.ogUrl)
     return result
   } catch (error) {
-    console.error('Error fetching Open Graph Data:', error)
+    console.log('Error fetching Open Graph Data:', error)
     return {}
   }
 }
@@ -61,6 +73,9 @@ async function getRakutenAffiliateUrl(item_id: string) {
   const [shop_code, item_code] = item_id.split("/")
   const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
   const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID
+
+  await setTimeout(Math.random() * 10000);
+
   const response = await fetch(api_url + "?" + new URLSearchParams({
       format: 'json',
       keyword: item_code,
@@ -71,6 +86,7 @@ async function getRakutenAffiliateUrl(item_id: string) {
   }).toString());
   const data = await response.text();
   if (data == null){
+    console.log("getRakutenAffiliateUrl response data is null")
     return null
   }
   const json_response:RakutenAffiliateResponse = JSON.parse(data)
@@ -78,7 +94,36 @@ async function getRakutenAffiliateUrl(item_id: string) {
     console.log("fetched rakuten affiliate url: "+ item_id)
     return json_response.Items[0].Item.affiliateUrl
   } else {
-    console.log("error fetching rakuten affiliate url: "+ item_id)
+    console.log("error fetching rakuten affiliate item_id: " + item_id + " response: "+ data)
+    return null
+  }
+}
+
+async function getRakutenKakakuNaviUrl(keyword: string) {
+  const api_url = "https://app.rakuten.co.jp/services/api/Product/Search/20170426"
+  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
+  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID
+
+  await setTimeout(Math.random() * 10000);
+
+  const response = await fetch(api_url + "?" + new URLSearchParams({
+      format: 'json',
+      formatVersion: '2',
+      keyword: keyword,
+      applicationId: application_id,
+      affiliateId: affiliate_id,
+      elements: 'count,affiliateUrl,productName',
+  }).toString());
+  const data = await response.text();
+  if (data == null){
+    return null
+  }
+  const json_response:RakutenKakakuNaviItems = JSON.parse(data)
+  if (json_response.count > 0) {
+    console.log("fetched rakuten affiliate(kakakunavi) url: "+ keyword)
+    return json_response.Products[0].affiliateUrl
+  } else {
+    console.log("error fetching rakuten affiliate(kakakunavi) keyword: " + keyword + " response: "+ data)
     return null
   }
 }
@@ -94,6 +139,8 @@ if (fixed == false) {
 let url_rakuten_affiliate = null
 if (code_rakuten != null) {
   url_rakuten_affiliate = await getRakutenAffiliateUrl(code_rakuten)
+} else if (keyword_rakuten != null) {
+  url_rakuten_affiliate = await getRakutenKakakuNaviUrl(keyword_rakuten)
 }
 ---
 
@@ -109,7 +156,7 @@ if (code_rakuten != null) {
   <div class="oglc-buttons">
     {url_amazon && <a href={url_amazon} class="oglc-btn" target="_blank">Amazon</a>}
     {url_yahoo && <a href={url_yahoo} class="oglc-btn" target="_blank">Yahoo!</a>}
-    {code_rakuten && url_rakuten_affiliate && <a href={url_rakuten_affiliate} class="oglc-btn" target="_blank">楽天</a>}
+    {url_rakuten_affiliate && <a href={url_rakuten_affiliate} class="oglc-btn" target="_blank">楽天</a>}
   </div>
 </div>
 
