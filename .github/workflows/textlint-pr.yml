@@ -11,6 +11,7 @@ jobs:
     runs-on: macos-14 # pagefind not working on x64 architecture
     permissions:
       contents: read
+      issues: write
     timeout-minutes: 1
     steps:
       - name: checkout
@@ -23,18 +24,6 @@ jobs:
           cache: npm
       - name: Run npm ci
         run: npm install --include=dev
-      - name: textlint-github-pr-check
-        uses: tsuyoshicho/action-textlint@v3
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-check
-          textlint_flags: "src/content/**"
-      - name: textlint-github-check
-        uses: tsuyoshicho/action-textlint@v3
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-check
-          textlint_flags: "src/content/**"
       - name: textlint-github-pr-review
         uses: tsuyoshicho/action-textlint@v3
         with:
