@@ -7,7 +7,7 @@ date: <%= to_date %>
 import Instagram from '../../../components/Embed/Instagram.astro';
 import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
 import X from '../../../components/Embed/X.astro';
-import { YouTube } from 'astro-embed';
+import YouTube from '../../../components/Embed/Youtube.astro';
 
 {/* greeting here */}
 
@@ -30,7 +30,7 @@ import { YouTube } from 'astro-embed';
 
 <Instagram instagramId="" />
 <X url="" />
-<YouTube posterQuality="max" id="" />
+<YouTube id="" />
 
 - [Tweet Log - Twitter](https://twitter.com/search?q=(from%3Alegnoh)%20until%3A<%= to_date %>%20since%3A<%= from_date %>%20-filter%3Areplies&src=typed_query)
 - [Commit Log - GitHub](https://github.com/legnoh?tab=overview&from=<%= from_date %>&to=<%= to_date %>)

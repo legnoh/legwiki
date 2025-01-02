@@ -1,8 +1,8 @@
 ---
 type Props = {
-	youTubeId: string;
+	id: string;
 };
-const { youTubeId } = Astro.props as Props;
-const youtubeUrl = `https://www.youtube.com/embed/${youTubeId}`
+const { id } = Astro.props as Props;
+const youtubeUrl = `https://www.youtube.com/embed/${id}`
 ---
 <iframe src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
