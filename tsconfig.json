@@ -1,5 +1,5 @@
 {
   "extends": "astro/tsconfigs/strict",
   "include": ["src/**/*"],
-  "exclude": ["src/components/Affiliate/LinkSwitch.astro"]
+  "exclude": ["src/components/Global/LinkSwitch.astro"]
 }

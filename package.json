@@ -21,6 +21,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "textlint": "^14.4.0",
+    "textlint-rule-preset-ja-technical-writing": "^10.0.1",
     "typescript": "^5.7.2"
   }
 }

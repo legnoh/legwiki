@@ -1,0 +1,36 @@
+---
+// for twitter script loading
+// https://astro-embed.netlify.app/components/twitter/#loading-twitters-javascript
+type Props = {
+	url: string;
+};
+const { url } = Astro.props as Props;
+import { Tweet } from 'astro-embed';
+---
+<div class="light-x-embed">
+    <Tweet id={url} theme="light" />
+</div>
+<div class="dark-x-embed">
+    <Tweet id={url} theme="dark" />
+</div>
+
+<script async is:inline src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<style is:global>
+    :root[data-theme='light'] {
+        div.light-x-embed {
+            display: block;
+        }
+        div.dark-x-embed {
+            display: none;
+        }
+    }
+    :root[data-theme='dark'] {
+        div.dark-x-embed {
+            display: block;
+        }
+        div.light-x-embed {
+            display: none;
+        }
+    }
+</style>

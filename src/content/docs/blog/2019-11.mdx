@@ -3,9 +3,11 @@ title: 2019-11 / Notion 単推し, オートロック自動解錠, 電気代が�
 description: 君の推し Notion を聞かせてくれ！ 電気代が高いので NatureRemo を買い直したりなど。
 date: 2019-03-10
 ---
-import YouTube from '../../../components/Embed/Youtube.astro';
+
 import Instagram from '../../../components/Embed/Instagram.astro';
-import Tweet from '../../../components/Embed/Tweet.astro';
+import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
+import X from '../../../components/Embed/X.astro';
+import { YouTube } from 'astro-embed';
 
 今回の週報から、Notionで書いていくことにしました。経緯は後で。
 
@@ -17,7 +19,7 @@ import Tweet from '../../../components/Embed/Tweet.astro';
 
 そして先日、遂に妙案が浮かんでしまった。これだ。
 
-<Tweet tweetLink="https://twitter.com/legnoh/status/1104675919631802369" />
+<X url="https://twitter.com/legnoh/status/1104675919631802369" />
 
 すでに以前の「ふろ自動」で使っている [microbot push](https://microbot.is/ja/push/) をさらに2台買い足し、それをProtaのWebhookを叩かれた時に、2秒程度の時差でボタンを押すようにストーリーを組んだ。
 

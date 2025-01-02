@@ -1,0 +1,28 @@
+name: textlint
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  main:
+    runs-on: macos-14 # pagefind not working on x64 architecture
+    permissions:
+      contents: read
+    timeout-minutes: 1
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Run npm ci
+        run: npm install --include=dev
+      - name: textlint-github-pr-review
+        uses: tsuyoshicho/action-textlint@v3
+        with:
+          github_token: ${{ secrets.github_token }}
+          textlint_flags: "doc/**"

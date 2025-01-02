@@ -2,9 +2,16 @@
 	--sl-content-width: 70rem;
 }
 
-.sl-markdown-content :is(img, picture, video, canvas, svg, iframe):not(:where(.not-content *)) {
+.sl-markdown-content :is(img, picture, video, canvas, svg):not(:where(.not-content *)) {
 	display: block;
 	max-width: 80%;
 	max-height: 80%;
 	height: auto;
+}
+
+.sl-markdown-content :is(iframe):not(:where(.not-content *)) {
+	display: block;
+	max-width: 80%;
+	max-height: 80%;
+	height: revert-layer;
 }
