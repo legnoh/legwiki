@@ -77,7 +77,6 @@ export default defineConfig({
         instagram: 'https://www.instagram.com/legnoh/',
         youtube: 'https://www.youtube.com/@legnoh',
         github: 'https://github.com/legnoh',
-        rss: 'https://legwiki.lkj.io/rss.xml',
       },
     }),
   ],
