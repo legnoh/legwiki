@@ -1,7 +1,7 @@
 name: textlint-pr
 
 on:
-  pull_request_target:
+  pull_request:
     branches: ["main"]
     types: [ opened, synchronize ]
   workflow_dispatch:
@@ -9,9 +9,6 @@ on:
 jobs:
   main:
     runs-on: macos-14 # pagefind not working on x64 architecture
-    permissions:
-      contents: read
-      issues: write
     timeout-minutes: 1
     steps:
       - name: checkout
