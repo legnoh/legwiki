@@ -5,4 +5,4 @@ type Props = {
 const { id } = Astro.props as Props;
 const youtubeUrl = `https://www.youtube.com/embed/${id}`
 ---
-<iframe src={youtubeUrl} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe src={youtubeUrl} title="YouTube video player" width="600" height="400" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
