@@ -1,7 +1,8 @@
 name: textlint
 
 on:
-  pull_request:
+  pull_request_target:
+    branches: ["main"]
     types: [ opened, synchronize ]
   workflow_dispatch:
 
