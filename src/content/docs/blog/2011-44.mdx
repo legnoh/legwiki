@@ -34,7 +34,7 @@ text.replace(pattern_hashtag,'<a href="javascript:void(0)"onclick="makeSearch('+
 > text.replace(pattern_hashtag,'<a href="javascript:void(0)"onclick="makeSearch(\''+tag[0]+'\')">'+tag[0]+'</a>');
 ```
 
-ものすごく細かい文法ミスしててリアルにorz状態に。
+ものすごく細かい文法ミスしててリアルにorz状態。
 `makeSearch('#hoge')` みたいになるわけだから、最後にダッシュ残らないといけないのね。。。
 
 ----
@@ -56,7 +56,7 @@ function urlExpand(url){
 }
 ```
 
-だがこれでsuccessが呼ばれずerrorが呼ばれ、getJSONを使って同様にするもやはり動かず。
+しかし、これでsuccessではなくerrorが呼ばれ、getJSONを使って同様にするもやはり動かず。
 一応戻ってきたjsonファイルを確認するも、きちんとjqueryで関数名をつけた正規のjsonpが返ってきてた。
 つまり、通信も成功してて、その中身も正しいjsonなのを確認したのだけど、何故か弾かれてしまっている。
 

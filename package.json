@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "check": "astro check && tsc",
+    "lint": "node_modules/.bin/textlint src/content/**",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
