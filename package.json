@@ -20,7 +20,9 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "textlint": "^14.4.0",
-    "textlint-rule-preset-ja-technical-writing": "^10.0.1",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-plugin-mdx": "^1.0.1",
+    "textlint-rule-preset-japanese": "^10.0.4",
     "typescript": "^5.7.2"
   }
 }

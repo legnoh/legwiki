@@ -1,0 +1,4 @@
+plugins:
+  textlint-plugin-mdx: true
+rules:
+  preset-japanese: true
