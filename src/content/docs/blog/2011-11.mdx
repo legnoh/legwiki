@@ -4,10 +4,14 @@ description: ''
 date: 2011-03-08
 ---
 
-import Instagram from '../../../components/Embed/Instagram.astro';
-import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
-import X from '../../../components/Embed/X.astro';
-import YouTube from '../../../components/Embed/Youtube.astro';
+{/* textlint-disable */}
+
+import Instagram from '../../../components/Embed/Instagram.astro'
+import OGLinkCard from '../../../components/Embed/OGLinkCard.astro'
+import X from '../../../components/Embed/X.astro'
+import YouTube from '../../../components/Embed/Youtube.astro'
+
+{/* textlint-enable */}
 
 <X url="mathematics_bot/status/44884896354807809" />
 
@@ -15,7 +19,7 @@ import YouTube from '../../../components/Embed/Youtube.astro';
 
 ----
 
-問題を簡単にするために、与えられた数の一の位を抽出して考える。(以下数字のみのものは全て一の位のことを指す）
+問題を簡単にするため、与えられた数の一の位を抽出して考える。(以下数字のみのものは全て一の位のことを指す）
 
 10の倍数を作るには、
 
@@ -24,16 +28,16 @@ import YouTube from '../../../components/Embed/Youtube.astro';
 
 のどちらかを満たした後、乗算で10の倍数にできる。2の倍数は奇数同士の加減算、または偶数が1つあれば良い。
 
-与えられた4つの数で5の倍数を作ることを考えると、その中に元々5の倍数がある場合、既に条件を満たしているので、
-考えるべきは、それに含まれない *1,2,3,4,6,7,8,9の中から4つ選んだ場合* になる。
+与えられた4つの数で5の倍数を作ることを考えると、その中に元々5の倍数がある場合、既に条件を満たしている。
+よって考えるべきは、それに含まれない *1〜4と6〜9の中から4つ選んだ場合* になる。
 
 上記以外のパターンで奇数と偶数の組合せによって5の倍数を作るのは
 
 1. 4/6/1/9の中から2個選んだ加減算
 1. 2/8/3/7の中から2個選んだ加減算
-1. 一の位が同じ数が2つあった場合(11と21等)の減算
+1. 一の位で同じ数が2つあった場合(11と21等)の減算
 
-のいずれかで可能である。例えばこんな感じ。
+のいずれかで可能。例えばこんな感じ。
 
 - 4と9なら 9-4=5
 - 8と3なら 8-3=5
@@ -42,8 +46,8 @@ import YouTube from '../../../components/Embed/Youtube.astro';
 
 4つの数を選ぶと、全ての場合で 1,2,3 のいずれかに当てはまる。
 
-負の数における思考は正・負の値と和・差で適宜逆転させることで自然数と同等に扱うことが可能なので考えずとも良い。
-よって必ず10の倍数が生成できることが分かる。
+負の数における思考は正・負の値と和・差で適宜逆転させると自然数と同等に扱うことが可能なので考えずとも良い。
+よって必ず10の倍数が生成できると分かる。
 
 ----
 

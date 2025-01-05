@@ -4,10 +4,14 @@ description: ''
 date: 2011-09-12
 ---
 
-import Instagram from '../../../components/Embed/Instagram.astro';
-import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
-import X from '../../../components/Embed/X.astro';
-import YouTube from '../../../components/Embed/Youtube.astro';
+{/* textlint-disable */}
+
+import Instagram from '../../../components/Embed/Instagram.astro'
+import OGLinkCard from '../../../components/Embed/OGLinkCard.astro'
+import X from '../../../components/Embed/X.astro'
+import YouTube from '../../../components/Embed/Youtube.astro'
+
+{/* textlint-enable */}
 
 ![](/img/blog/2011-38/20120126210527.jpeg)
 
@@ -22,9 +26,9 @@ IFRAME でライトな web ブラウザ的な使い方ができるようにし�
 2011年9月16日現在で自分が確認したもの。
 
 - 基本 … TLの取得時にentities情報を付加する
-    - ツイートされた場合、全てのURLはツイート上ではt.coで省略されている。これを何らかの方法で展開したい。
+    - ツイートされた場合、全てのURLがツイート上ではt.coで省略されている。これを何らかの方法で展開したい。
 - APIを出すときに、`&include_entities=true` をつける
-    - これにより、返ってくるJSONデータにentitiesが入り、t.coで省略されたURLを見れるようになる。
+    - これにより、返ってくるJSONデータにentitiesが入り、t.coで省略されたURLを見られるようになる。
 - entitiesの中身がややこしい
     - これまた非常にややこしい。
     - 基本的なURLはすべて `entities.urls[0].expanded_url`に入る

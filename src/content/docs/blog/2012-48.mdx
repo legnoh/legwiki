@@ -4,10 +4,14 @@ description: ''
 date: 2012-11-30
 ---
 
-import Instagram from '../../../components/Embed/Instagram.astro';
-import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
-import X from '../../../components/Embed/X.astro';
-import YouTube from '../../../components/Embed/Youtube.astro';
+{/* textlint-disable */}
+
+import Instagram from '../../../components/Embed/Instagram.astro'
+import OGLinkCard from '../../../components/Embed/OGLinkCard.astro'
+import X from '../../../components/Embed/X.astro'
+import YouTube from '../../../components/Embed/Youtube.astro'
+
+{/* textlint-enable */}
 
 初めて使うFlashとas3に悪戦苦闘中…。
 XMLをパースしてその一件目のタイトルをTextFieldで表示するプログラムを作っていたが、これだけで２日くらいハマったのでメモ。
@@ -67,7 +71,7 @@ TypeError: Error #1010: A term is undefined and has no properties.
 - [XML名前空間の簡単な説明](http://www.kanzaki.com/docs/sw/names.html)
 
 要約すると、XMLの一つの文書の中に複数形式のXML文書が混ざった時、タグ名が混同すると面倒なので、そんな時のために接頭辞つけて区別しましょう、と。
-それが xmlns (XMLNamespace,名前空間)であり、これがついた場合、**子孫のタグがすべてこの名前空間に属することになる。**
+それが xmlns (XMLNamespace,名前空間)であり、これがついた場合、**子孫のタグがすべてこの名前空間へ属することになる。**
 つまり `<Title>` が欲しくても、厳密には
 
 - `xmlns="urn:yahoo:jp:srch"`

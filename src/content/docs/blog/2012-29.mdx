@@ -4,10 +4,14 @@ description: ''
 date: 2012-07-18
 ---
 
-import Instagram from '../../../components/Embed/Instagram.astro';
-import OGLinkCard from '../../../components/Embed/OGLinkCard.astro';
-import X from '../../../components/Embed/X.astro';
-import YouTube from '../../../components/Embed/Youtube.astro';
+{/* textlint-disable */}
+
+import Instagram from '../../../components/Embed/Instagram.astro'
+import OGLinkCard from '../../../components/Embed/OGLinkCard.astro'
+import X from '../../../components/Embed/X.astro'
+import YouTube from '../../../components/Embed/Youtube.astro'
+
+{/* textlint-enable */}
 
 個人用のWikiを [PukiWiki](https://pukiwiki.osdn.jp/) から [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki/ja) に変えようと思い、ひと通り使えるように環境構築した。
 
@@ -136,8 +140,8 @@ xmlファイルが出力されるので、今度はそれを自分のMediaWiki�
 日本語だとURLが変わってしまっているので、Wikiのトップページから「特別ページ」→「ページファイルの取り込み」と進むと見つかるはず。
 
 インポートが完了しても、ヘルプファイルの目次とURLが違うため、表に出てこない。
-そこで、Help:Contents/jaページで右上の▼マークから、「移動」を選び、新しいページ名に「**ヘルプ**」(セレクトボックス)と「**目次**」(フリー入力)と入力し、「ページを移動する」をクリック。
-これでツールバーのリンクからヘルプ一覧にアクセスできるようになる。
+そこで、Help:Contents/jaページで右上の▼マークから、「移動」→ 新しいページ名に「**ヘルプ**」(セレクトボックス)と「**目次**」(フリー入力)と入力し、「ページを移動する」をクリック。
+これでツールバーのリンクからヘルプ一覧へアクセスできるようになる。
 
 ## 7.MathJax有効化
 
@@ -177,7 +181,7 @@ VPSでも同じ作業をした更なる蛇足を書く。
 - TeX Live 2012
 - ImageMagick 6.5.4-7
 
-ここでは、MediaWiki を `/var/www/html/wiki` に導入し、URLから見れるところまで完了した、という前提で解説する。
+ここでは、MediaWiki を `/var/www/html/wiki` に導入し、URLから見られるところまで完了した、という前提で解説する。
 
 ## 下準備
 
@@ -333,7 +337,7 @@ $wgTexvc = ''''/usr/local/bin/texvc'''';
 # reboot
 ```
 
-これで数式が見れるようになっているはず。試しに以下を入力してみると出力が可能になるはずだ。
+これで数式が見られるようになっているはず。試しに以下を入力してみると出力が可能になるはずだ。
 
 ```xml
 <math>\sum_{n=0}^\infty \frac{x^n}{n!}</math>;

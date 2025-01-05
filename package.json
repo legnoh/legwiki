@@ -6,21 +6,21 @@
     "dev": "astro dev",
     "start": "astro dev",
     "check": "astro check && tsc",
+    "lint": "node_modules/.bin/textlint src/content/**",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "markdown-it": "^14.1.0",
     "open-graph-scraper": "^6.8.3",
-    "sanitize-html": "^2.14.0",
-    "sharp": "^0.33.5",
     "starlight-blog": "^0.16.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "textlint": "^14.4.0",
-    "textlint-rule-preset-ja-technical-writing": "^10.0.1",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "textlint-plugin-mdx": "^1.0.1",
+    "textlint-rule-preset-japanese": "^10.0.4",
     "typescript": "^5.7.2"
   }
 }
