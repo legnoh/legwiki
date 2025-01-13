@@ -21,6 +21,6 @@
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-plugin-mdx": "^1.0.1",
     "textlint-rule-preset-japanese": "^10.0.4",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   }
 }
