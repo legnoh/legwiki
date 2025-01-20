@@ -12,7 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "open-graph-scraper": "^6.8.3",
+    "open-graph-scraper": "^6.9.0",
     "starlight-blog": "^0.16.1"
   },
   "devDependencies": {
