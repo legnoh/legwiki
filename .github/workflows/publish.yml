@@ -20,7 +20,7 @@ jobs:
         
         - name: Check Project Node version
           id: check-node-version
-          run: echo "node_version=$(jq -r ".volta.node" package.json)" >> $GITHUB_OUTPUTS
+          run: echo "node_version=$(jq -r ".volta.node" package.json)" >> $GITHUB_OUTPUT
 
         - name: Setup Node
           uses: actions/setup-node@v4
