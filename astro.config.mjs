@@ -2,8 +2,6 @@ import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
 
-const site = 'https://legwiki.lkj.io';
-
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
@@ -18,11 +16,11 @@ export default defineConfig({
       head: [
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: 'legwiki-og-image.png' },
+					attrs: { property: 'og:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: 'legwiki-og-image.png' },
+          attrs: { property: 'twitter:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
 				},
 			],
       components: {
