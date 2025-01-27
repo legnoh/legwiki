@@ -1,6 +1,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
+import { loadEnv } from "vite";
+
+const env = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
@@ -16,11 +19,11 @@ export default defineConfig({
       head: [
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
+					attrs: { property: 'og:image', content: env.ROOT_URL + '/legwiki-og-image.png' },
 				},
 				{
 					tag: 'meta',
-          attrs: { property: 'twitter:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
+          attrs: { property: 'twitter:image', content: env.ROOT_URL + '/legwiki-og-image.png' },
 				},
 			],
       components: {
