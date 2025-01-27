@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
+import markdoc from '@astrojs/markdoc';
 import { loadEnv } from "vite";
 
 const env = loadEnv(process.env.NODE_ENV, process.cwd(), '');
@@ -8,6 +9,7 @@ const env = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
+    markdoc(),
     starlight({
       title: "legwiki",
       description: "compass for myself.",
@@ -17,28 +19,28 @@ export default defineConfig({
         replacesTitle: true,
       },
       head: [
-				{
-					tag: 'meta',
-					attrs: { property: 'og:image', content: env.ROOT_URL + '/legwiki-og-image.png' },
-				},
-				{
-					tag: 'meta',
+        {
+          tag: 'meta',
+          attrs: { property: 'og:image', content: env.ROOT_URL + '/legwiki-og-image.png' },
+        },
+        {
+          tag: 'meta',
           attrs: { property: 'twitter:image', content: env.ROOT_URL + '/legwiki-og-image.png' },
-				},
-			],
+        },
+      ],
       components: {
         MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
       },
       customCss: [
         './src/styles/custom.css',
-			],
+      ],
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 6
       },
       editLink: {
-				baseUrl: 'https://github.com/legnoh/legwiki/tree/main/',
-			},
+        baseUrl: 'https://github.com/legnoh/legwiki/tree/main/',
+      },
       defaultLocale: 'ja',
       plugins: [
         starlightBlog({
