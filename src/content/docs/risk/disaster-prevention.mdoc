@@ -7,18 +7,9 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-{/* textlint-disable */}
-
-import Instagram from '../../../components/Embed/Instagram.astro'
-import OGLinkCard from '../../../components/Embed/OGLinkCard.astro'
-import X from '../../../components/Embed/X.astro'
-import YouTube from '../../../components/Embed/Youtube.astro'
-
-{/* textlint-enable */}
-
-:::caution
+{% aside type="caution" %}
 本項目は医薬品、管理医療機器についての記載がありますが、筆者による推薦の意図はないことをご了承ください。
-:::
+{% /aside %}
 
 [リスク評価](/risk/assessment) を根本戦略に据えつつ、防災の面において、具体的に家庭でどのような対策を行えば良いのかをまとめる。
 
@@ -62,13 +53,13 @@ import YouTube from '../../../components/Embed/Youtube.astro'
 
 ## 一覧
 
-:::note
+{% aside type="note" %}
 当ページで紹介している内容はすべて1人分を想定した数を記載しています。家族分も用意する場合は人数分に読み替えてください。
-:::
+{% /aside %}
 
-:::caution
+{% aside type="caution" %}
 一部の項目は筆者の検証前の状態です。それらの項目には 🤔 マークをつけています。
-:::
+{% /aside %}
 
 ### 常時携帯品
 
@@ -113,7 +104,12 @@ import YouTube from '../../../components/Embed/Youtube.astro'
 
 ##### Anker 733 Power Bank
 
-<OGLinkCard url="https://www.ankerjapan.com/products/a1651" url_amazon="https://www.amazon.co.jp/dp/B09XXQ25PF" url_yahoo="https://store.shopping.yahoo.co.jp/ankerdirect/a1651.html" code_rakuten="anker/a1651" />
+{% oglinkcard
+  url="https://www.ankerjapan.com/products/a1651"
+  url_amazon="https://www.amazon.co.jp/dp/B09XXQ25PF"
+  url_yahoo="https://store.shopping.yahoo.co.jp/ankerdirect/a1651.html"
+  code_rakuten="anker/a1651" %}
+{% /oglinkcard %}
 
 - 10000mAhのモバイルバッテリーだが、普段はPC充電器として使える高い汎用性があり、パススルー充電にも対応している。
 - Qi2(MagSafe)などの無線充電は使いやすいが、充電時間・容量効率共に悪く、対応デバイスも選ぶことから優先度は下がる。
@@ -123,10 +119,12 @@ import YouTube from '../../../components/Embed/Youtube.astro'
 
 ##### CIO 240W CtoC 1m シリコンケーブル
 
-<OGLinkCard url="https://connectinternationalone.co.jp/cioproduct/cable/silicon/シリコンケーブル240w-ctoc-1m/"
-url_amazon="https://www.amazon.co.jp/dp/B0C4P4FCGT"
-url_yahoo="https://shopping.yahoo.co.jp/products/z45i6ukpjv"
-code_rakuten="machinoomise/cio-sl240w" />
+{% oglinkcard
+  url="https://connectinternationalone.co.jp/cioproduct/cable/silicon/シリコンケーブル240w-ctoc-1m/" url_amazon="https://www.amazon.co.jp/dp/B0C4P4FCGT"
+  url_yahoo="https://shopping.yahoo.co.jp/products/z45i6ukpjv"
+  keyword_rakuten="CIO-SL240W-CC"
+%}
+{% /oglinkcard %}
 
 - 持ち物を少なくするために、1つのケーブルに対する汎用性を最大限上げたいのだが、機能性の高いケーブルは太く嵩張ることが多い。
 - これは映像出力まで対応するUSB 4.0 Gen2が出せるだけでなく、シリコンケーブルである程度の柔軟性があって取りまわしやすい。
@@ -134,11 +132,12 @@ code_rakuten="machinoomise/cio-sl240w" />
 
 ##### Anker PowerLine USB-C & USB 3.0ケーブル (0.9m)
 
-<OGLinkCard url="https://www.ankerjapan.com/products/a8163"
-url_amazon="https://www.amazon.co.jp/dp/B071XP29CZ"
-url_yahoo="https://store.shopping.yahoo.co.jp/ankerdirect/a8163.html"
-code_rakuten="anker/A8163"
-/>
+{% oglinkcard
+  url="https://www.ankerjapan.com/products/a8163"
+  url_amazon="https://www.amazon.co.jp/dp/B071XP29CZ"
+  url_yahoo="https://store.shopping.yahoo.co.jp/ankerdirect/a8163.html"
+  keyword_rakuten="A8163011" %}
+{% /oglinkcard %}
 
 - 733にUSB-Aの充電口があるのでそれを活かせるようにということで採用。正直ここはUSB-A to USB-C ならなんでも良い。
 
