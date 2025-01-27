@@ -72,6 +72,7 @@ jobs:
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v3.0
       with:
+        alias: ${{ github.head_ref }}
         publish-dir: './dist'
         production-deploy: ${{ steps.set-option-value.outputs.production_deploy }}
         github-token: ${{ github.token }}
