@@ -1,33 +1,53 @@
-name: Publish
+name: CI/Publish
 
 on:
   push:
+    branches: ["main"]
+  pull_request_target:
     branches: ["main"]
   workflow_dispatch:
 
 jobs:
     build:
-        runs-on: macos-13-xlarge # pagefind not working on x64 architecture
+        runs-on: macos-14 # pagefind not working on x64 architecture
         steps:
         - uses: actions/checkout@v4
           with:
+            ref: ${{ github.event.pull_request.head.sha || github.sha }}
             lfs: true
         - uses: actions/setup-node@v4
           with:
-            node-version: 18
+            node-version: 22
             cache: 'npm'
         - name: Run npm ci
-          run: npm ci
+          run: npm ci --include=dev
+        - name: textlint-github-pr-review
+          if: github.event_name == 'pull_request_target'
+          uses: tsuyoshicho/action-textlint@v3
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            reporter: github-pr-review
+            textlint_flags: "src/content/**"
+        - name: Run astro check
+          run: npm run check
         - name: Run astro build
           run: npm run build
           env:
             RAKUTEN_APPLICATION_ID:  ${{ secrets.RAKUTEN_APPLICATION_ID }}
             RAKUTEN_AFFILIATE_ID:  ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        - name: Set Deploy parameter
+          id: set-option-value
+          run: |
+            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+              echo "production_deploy=false" >> $GITHUB_OUTPUT
+            else
+              echo "production_deploy=true" >> $GITHUB_OUTPUT
+            fi
         - name: Deploy to Netlify
           uses: nwtgck/actions-netlify@v3.0
           with:
             publish-dir: './dist'
-            production-deploy: true
+            production-deploy: ${{ steps.set-option-value.outputs.production_deploy }}
             github-token: ${{ secrets.GITHUB_TOKEN }}
           env:
             NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
