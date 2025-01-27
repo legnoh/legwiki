@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
 
+const site = 'https://legwiki.lkj.io';
+
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
