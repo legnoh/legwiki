@@ -9,7 +9,7 @@ on:
 
 jobs:
     build:
-        runs-on: macos-14 # pagefind not working on x64 architecture
+        runs-on: macos-latest # pagefind not working on x64 architecture
         steps:
 
         - name: Checkout repository
