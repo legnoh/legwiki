@@ -41,7 +41,16 @@ jobs:
       with:
         app-id: ${{ secrets.APP_ID }}
         private-key: ${{ secrets.APP_PRIVATE_KEY }}
-    
+
+    - name: Textlint to PR
+      if: github.event_name == 'pull_request_target'
+      uses: tsuyoshicho/action-textlint@v3
+      with:
+        github_token: ${{ steps.github-app.outputs.token }}
+        reporter: github-pr-review
+        textlint_flags: "src/content/**"
+        fail_on_error: true
+
     - name: Set Build parameter
       id: build-parameter
       run: |
@@ -52,15 +61,6 @@ jobs:
           echo "root_url=https://legwiki.lkj.io"
           echo "isproduction=true" >> $GITHUB_OUTPUT
         fi
-
-    - name: Textlint to PR
-      if: github.event_name == 'pull_request_target'
-      uses: tsuyoshicho/action-textlint@v3
-      with:
-        github_token: ${{ steps.github-app.outputs.token }}
-        reporter: github-pr-review
-        textlint_flags: "src/content/**"
-        fail_on_error: true
 
     - name: Run astro check
       run: npm run check
