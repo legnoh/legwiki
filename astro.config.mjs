@@ -1,5 +1,7 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
+import markdoc from '@astrojs/markdoc';
 import starlightBlog from 'starlight-blog';
 
 /* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
@@ -24,11 +26,11 @@ export default defineConfig({
       head: [
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + 'legwiki-og-image.png' },
+					attrs: { property: 'og:image', content: 'legwiki-og-image.png' },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + 'legwiki-og-image.png' },
+					attrs: { property: 'twitter:image', content: 'legwiki-og-image.png' },
 				},
 			],
       components: {
