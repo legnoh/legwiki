@@ -1,0 +1,86 @@
+name: Add this week's blog PR
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: 0 3 * * 1
+
+jobs:
+  add-this-week-template:
+    name: Add this week post's branch
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Get GitHub App Token
+      uses: actions/create-github-app-token@v1
+      id: generate-token
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Add Post Directory
+      id: post-dir
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TZ: 'Asia/Tokyo'
+      run: |
+        sunday='sunday'
+        if [ $(date +%w) -ne 0 ] ; then
+          sunday="next sunday"
+        fi
+
+        year=$(date +%Y --date "${sunday}")
+        week=$(date +%U --date "${sunday}")
+        slug=${year}-${week}
+        to_date=$(date '+%Y-%m-%d' --date "${sunday}")
+        from_date=$(date '+%Y-%m-%d' --date "6 day ago ${to_date}")
+        post_dir=src/content/docs/blog
+        image_dir=public/img/blog/${slug}
+
+        # mkdir, hero alias
+        mkdir -p ${image_dir}
+        touch ${image_dir}/.gitkeep
+
+        # make blog file
+        erb from_date=${from_date} \
+            to_date=${to_date} \
+            slug=${slug} \
+            src/templates/blog/post.mdx.erb > ${post_dir}/${slug}.mdx
+
+        # set env in global(GitHub Actions)
+        if [ -n "${GITHUB_ACTION}" ]; then
+            echo "from_date=${from_date}" >> $GITHUB_OUTPUT
+            echo "to_date=${to_date}" >> $GITHUB_OUTPUT
+            echo "slug=${slug}" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v7
+      id: create-pull-request
+      with:
+        branch: ${{ steps.post-dir.outputs.slug }}
+        commit-message: "[skip ci] initialize ${{ steps.post-dir.outputs.slug }} blog post"
+        token: ${{ steps.generate-token.outputs.token }}
+        sign-commits: true
+        title: "[post] ${{ steps.post-dir.outputs.slug }}"
+        body: |
+          - **target:** ${{ steps.post-dir.outputs.from_date }}(Mon) ~ ${{ steps.post-dir.outputs.to_date }}(Sun)
+
+          ## this week's theme
+
+          - what's up?
+
+          ## FYI
+
+          - :blue_heart: [Tweet Log - Twitter](https://twitter.com/search?q=(from%3Alegnoh)%20until%3A${{ steps.post-dir.outputs.to_date }}%20since%3A${{ steps.post-dir.outputs.from_date }}%20-filter%3Areplies&src=typed_query)
+          - :computer: [Commit Log - GitHub](https://github.com/legnoh?tab=overview&from=${{ steps.post-dir.outputs.from_date }}&to=${{ steps.post-dir.outputs.to_date }})
+          - :train: [Timeline - Google Maps](https://www.google.com/maps/timeline?pb=!1m2!1m1!1s${{ steps.post-dir.outputs.from_date }})
+          - :shopping_cart: Order history: [Yahoo! Shopping](https://odhistory.shopping.yahoo.co.jp/order-history/list) | [Amazon](https://www.amazon.co.jp/gp/css/order-history)
+          - :money_with_wings: [Expenses - MoneyForward](https://moneyforward.com/cf)
+          - :bookmark_tabs: [My Bookmark - Hatena Bookmark](https://b.hatena.ne.jp/Ryo_K/bookmark)
+          - :drop_of_blood: [Timeline - Withings Health Mate](https://healthmate.withings.com/timeline)
+          - :sun_with_face: [Weather forecast - OpenWeatherMap](https://openweathermap.org/city/1850144)
+        labels: posts
+        assignees: legnoh

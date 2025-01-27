@@ -11,30 +11,39 @@ jobs:
     build:
         runs-on: macos-14 # pagefind not working on x64 architecture
         steps:
-        - uses: actions/checkout@v4
+
+        - name: Checkout repository
+          uses: actions/checkout@v4
           with:
             ref: ${{ github.event.pull_request.head.sha || github.sha }}
             lfs: true
-        - uses: actions/setup-node@v4
+
+        - name: Setup Node
+          uses: actions/setup-node@v4
           with:
             node-version: 22
             cache: 'npm'
+
         - name: Run npm ci
           run: npm ci --include=dev
-        - name: textlint-github-pr-review
+
+        - name: Textlint to PR
           if: github.event_name == 'pull_request_target'
           uses: tsuyoshicho/action-textlint@v3
           with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
             reporter: github-pr-review
             textlint_flags: "src/content/**"
+
         - name: Run astro check
           run: npm run check
+
         - name: Run astro build
           run: npm run build
           env:
             RAKUTEN_APPLICATION_ID:  ${{ secrets.RAKUTEN_APPLICATION_ID }}
             RAKUTEN_AFFILIATE_ID:  ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+
         - name: Set Deploy parameter
           id: set-option-value
           run: |
@@ -43,6 +52,7 @@ jobs:
             else
               echo "production_deploy=true" >> $GITHUB_OUTPUT
             fi
+
         - name: Deploy to Netlify
           uses: nwtgck/actions-netlify@v3.0
           with:
