@@ -12,7 +12,7 @@ jobs:
 
     - name: Get GitHub App Token
       uses: actions/create-github-app-token@v1
-      id: generate-token
+      id: github-app
       with:
         app-id: ${{ secrets.APP_ID }}
         private-key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -23,7 +23,6 @@ jobs:
     - name: Add Post Directory
       id: post-dir
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TZ: 'Asia/Tokyo'
       run: |
         sunday='sunday'
@@ -55,14 +54,14 @@ jobs:
             echo "to_date=${to_date}" >> $GITHUB_OUTPUT
             echo "slug=${slug}" >> $GITHUB_OUTPUT
         fi
-    
+
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       id: create-pull-request
       with:
         branch: ${{ steps.post-dir.outputs.slug }}
         commit-message: "[skip ci] initialize ${{ steps.post-dir.outputs.slug }} blog post"
-        token: ${{ steps.generate-token.outputs.token }}
+        token: ${{ steps.github-app.outputs.token }}
         sign-commits: true
         title: "[post] ${{ steps.post-dir.outputs.slug }}"
         body: |
