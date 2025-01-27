@@ -17,12 +17,16 @@ jobs:
           with:
             ref: ${{ github.event.pull_request.head.sha || github.sha }}
             lfs: true
+        
+        - name: Check Project Node version
+          id: check-node-version
+          run: echo "node_version=$(jq -r ".volta.node" package.json)" >> $GITHUB_OUTPUTS
 
         - name: Setup Node
           uses: actions/setup-node@v4
           with:
-            node-version: 22
-            cache: 'npm'
+            node-version: ${{ steps.check-node-version.outputs.node_version }}
+            cache: npm
 
         - name: Run npm ci
           run: npm ci --include=dev
