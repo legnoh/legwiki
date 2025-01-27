@@ -43,16 +43,16 @@ javascript で短縮URLの展開やろうとして、手短にURL展開してく
 
 ```js
 function urlExpand(url){
-	var exurl=url;
-	$.ajax({
-		type:"GET",
-		url :"http://ss-o.net/api/reurl.json?callback=?",
-		data:{url:url},
-		dataType:"jsonp",
-		success:function(data,status){exurl=data.url;},
-		error:function(){Ext.Msg.alert('短縮URL取得失敗');}
-	});
-	return exurl;
+  var exurl=url;
+  $.ajax({
+    type:"GET",
+    url :"http://ss-o.net/api/reurl.json?callback=?",
+    data:{url:url},
+    dataType:"jsonp",
+    success:function(data,status){exurl=data.url;},
+    error:function(){Ext.Msg.alert('短縮URL取得失敗');}
+  });
+  return exurl;
 }
 ```
 

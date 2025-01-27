@@ -18,22 +18,22 @@ XMLをパースしてその一件目のタイトルをTextFieldで表示する�
 
 ```actionscript-3
 public class Main extends Sprite {
-	
-	private var text_field:TextField;
-	
-	public function Main():void {
-		
-		text_field = new TextField();
-		
-		var loader:URLLoader = new URLLoader();
-		var request:URLRequest=new URLRequest("(Y!検索API)");
+  
+  private var text_field:TextField;
+  
+  public function Main():void {
+    
+    text_field = new TextField();
+    
+    var loader:URLLoader = new URLLoader();
+    var request:URLRequest=new URLRequest("(Y!検索API)");
 
-		loader.addEventListener(Event.COMPLETE,function(event:Event) {
-			var yXML:XML = new XML(event.target.data);
-			text_field.text = yXML.Result[0].Title; // Error!!
-		});
-		loader.load(request);
-	}
+    loader.addEventListener(Event.COMPLETE,function(event:Event) {
+      var yXML:XML = new XML(event.target.data);
+      text_field.text = yXML.Result[0].Title; // Error!!
+    });
+    loader.load(request);
+  }
 }
 ```
 
@@ -41,18 +41,18 @@ public class Main extends Sprite {
 
 ```xml
 <ResultSet xmlns="urn:yahoo:jp:srch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" firstResultPosition="1" totalResultsAvailable="408000000" totalResultsReturned="10" xsi:schemaLocation="urn:yahoo:jp:srch http://search.yahooapis.jp/PremiumWebSearchService/V1/WebSearchResponse.xsd">
-	<Result>
-		<Title>JavaScript - ウィキペディア - Wikipedia</Title>
-		<Summary>JavaScript（ジャバスクリプト）とは、オブジェクト指向スクリプト言語である。主にウェブ ブラウザなどのクライアントサイドで実装され、動的なウェブサイトの構築や、RIAなどの 高度なユーザインタフェースの開発に用いられる。</Summary>
-		<Url>http://ja.wikipedia.org/wiki/JavaScript</Url>
-		<ClickUrl>http://ja.wikipedia.org/wiki/JavaScript</ClickUrl>
-		<ModificationDate/>
-		<Cache>
-			<Url>http://cache.yahoofs.jp/search/cache?c=zAD2D7XXwZoJ&u=http://ja.wikipedia.org/wiki/JavaScript&p=javascript</Url>
-			<Size>98000</Size>
-		</Cache>
-	</Result>
-	…
+  <Result>
+    <Title>JavaScript - ウィキペディア - Wikipedia</Title>
+    <Summary>JavaScript（ジャバスクリプト）とは、オブジェクト指向スクリプト言語である。主にウェブ ブラウザなどのクライアントサイドで実装され、動的なウェブサイトの構築や、RIAなどの 高度なユーザインタフェースの開発に用いられる。</Summary>
+    <Url>http://ja.wikipedia.org/wiki/JavaScript</Url>
+    <ClickUrl>http://ja.wikipedia.org/wiki/JavaScript</ClickUrl>
+    <ModificationDate/>
+    <Cache>
+      <Url>http://cache.yahoofs.jp/search/cache?c=zAD2D7XXwZoJ&u=http://ja.wikipedia.org/wiki/JavaScript&p=javascript</Url>
+      <Size>98000</Size>
+    </Cache>
+  </Result>
+  …
 </ResultSet>
 ```
 
@@ -60,10 +60,10 @@ public class Main extends Sprite {
 
 ```actionscript-3
 TypeError: Error #1010: A term is undefined and has no properties.
-	at Function/<anonymous>()[/Users/HAL/Code/Legdoxea/Main.as:234]
-	at flash.events::EventDispatcher/dispatchEventFunction()
-	at flash.events::EventDispatcher/dispatchEvent()
-	at flash.net::URLLoader/onComplete()
+  at Function/<anonymous>()[/Users/HAL/Code/Legdoxea/Main.as:234]
+  at flash.events::EventDispatcher/dispatchEventFunction()
+  at flash.events::EventDispatcher/dispatchEvent()
+  at flash.net::URLLoader/onComplete()
 ```
 
 調べたところ、XMLのqName、名前空間に関する問題だということが分かった。こんなの知らなかった…。
@@ -97,29 +97,29 @@ default xml namespace = new Namespace("urn:yahoo:jp:srch");
 
 ```actionscript-3
 public class Main extends Sprite {
-	
-	private var text_field:TextField;
-	
-	public function Main():void {
-		
-		// デフォルト名前空間に設定
-		default xml namespace = new Namespace("urn:yahoo:jp:srch");
+  
+  private var text_field:TextField;
+  
+  public function Main():void {
+    
+    // デフォルト名前空間に設定
+    default xml namespace = new Namespace("urn:yahoo:jp:srch");
 
-		text_field = new TextField();
-		
-		var loader:URLLoader = new URLLoader();
-		var request:URLRequest=new URLRequest("(Y!検索API)");
+    text_field = new TextField();
+    
+    var loader:URLLoader = new URLLoader();
+    var request:URLRequest=new URLRequest("(Y!検索API)");
 
-		loader.addEventListener(Event.COMPLETE,function(event:Event) {
-			var yXML:XML = new XML(event.target.data);
-			
-			// xmlns:xsiの名前空間を削除
-			yXML.removeNamespace("http://www.w3.org/2001/XMLSchema-instance");
+    loader.addEventListener(Event.COMPLETE,function(event:Event) {
+      var yXML:XML = new XML(event.target.data);
+      
+      // xmlns:xsiの名前空間を削除
+      yXML.removeNamespace("http://www.w3.org/2001/XMLSchema-instance");
 
-			text_field.text = yXML.Result[0].Title; // JavaScript - ウィキペディア - Wikipedia
-		});
-		loader.load(request);
-	}
+      text_field.text = yXML.Result[0].Title; // JavaScript - ウィキペディア - Wikipedia
+    });
+    loader.load(request);
+  }
 }
 ```
 

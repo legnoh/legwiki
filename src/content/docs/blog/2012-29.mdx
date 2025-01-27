@@ -56,9 +56,9 @@ CUI の方法が多く情報として出ているが、初心者なのでなる�
 
 ```apache
 <ifModule rewrite_module>
-	RewriteEngine On
-	RewriteCond %{QUERY_STRING} .[^\/:*?x22<>|%]+(#|?|$) [nocase]
-	RewriteRule . - [forbidden]
+  RewriteEngine On
+  RewriteCond %{QUERY_STRING} .[^\/:*?x22<>|%]+(#|?|$) [nocase]
+  RewriteRule . - [forbidden]
 </ifModule>
 
 AllowOverride None
