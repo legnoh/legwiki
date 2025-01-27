@@ -1,4 +1,4 @@
-name: CI/Publish
+name: Publish
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
         - name: Set Deploy parameter
           id: set-option-value
           run: |
-            if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
               echo "production_deploy=false" >> $GITHUB_OUTPUT
             else
               echo "production_deploy=true" >> $GITHUB_OUTPUT
