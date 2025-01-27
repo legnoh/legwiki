@@ -48,6 +48,7 @@ jobs:
       with:
         github_token: ${{ steps.github-app.outputs.token }}
         reporter: github-pr-review
+        fail_on_error: true
         textlint_flags: "src/content/**"
 
     - name: Run astro check
