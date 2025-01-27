@@ -9,9 +9,6 @@ on:
 
 jobs:
   ci:
-    concurrency:
-      group: "ci-${{ github.ref }}"
-      cancel-in-progress: true
     runs-on: macos-latest # pagefind not working on x64 architecture
     steps:
 
