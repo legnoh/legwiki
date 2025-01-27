@@ -32,6 +32,7 @@ jobs:
           run: npm ci --include=dev
 
         - name: Get GitHub App Token
+          if: github.event_name == 'pull_request_target'
           uses: actions/create-github-app-token@v1
           id: github-app
           with:
