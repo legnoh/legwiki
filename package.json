@@ -1,22 +1,22 @@
 {
-  "name": "legwiki",
+  "name": "@legnoh/legwiki",
   "type": "module",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "check": "astro check && tsc",
-    "lint": "node_modules/.bin/textlint src/content/**",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro check && tsc",
+    "lint": "textlint src/content/**"
   },
   "dependencies": {
-    "open-graph-scraper": "^6.9.0",
-    "starlight-blog": "^0.16.1"
-  },
-  "devDependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/markdoc": "^0.12.4",
+    "@astrojs/starlight-markdoc": "^0.2.0",
+    "open-graph-scraper": "^6.9.0",
+    "starlight-blog": "^0.16.1",
     "textlint": "^14.4.2",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-plugin-mdx": "^1.0.1",

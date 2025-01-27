@@ -2,14 +2,6 @@ import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
 
-/* https://vercel.com/docs/projects/environment-variables/system-environment-variables#system-environment-variables */
-const VERCEL_PREVIEW_SITE =
-	process.env.VERCEL_ENV !== 'production' &&
-	process.env.VERCEL_URL &&
-	`https://${process.env.VERCEL_URL}`;
-
-const site = VERCEL_PREVIEW_SITE || 'https://legwiki.lkj.io/';
-
 export default defineConfig({
   site: 'https://legwiki.lkj.io',
   integrations: [
@@ -24,11 +16,11 @@ export default defineConfig({
       head: [
 				{
 					tag: 'meta',
-					attrs: { property: 'og:image', content: site + 'legwiki-og-image.png' },
+					attrs: { property: 'og:image', content: 'legwiki-og-image.png' },
 				},
 				{
 					tag: 'meta',
-					attrs: { property: 'twitter:image', content: site + 'legwiki-og-image.png' },
+					attrs: { property: 'twitter:image', content: 'legwiki-og-image.png' },
 				},
 			],
       components: {
