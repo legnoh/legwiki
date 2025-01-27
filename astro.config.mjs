@@ -16,8 +16,7 @@ export default defineConfig({
       head: [
 				{
 					tag: 'meta',
-					attrs: {
-            property: 'og:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
+					attrs: { property: 'og:image', content: process.env.ROOT_URL + '/legwiki-og-image.png' },
 				},
 				{
 					tag: 'meta',
