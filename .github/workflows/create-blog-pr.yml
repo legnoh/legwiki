@@ -60,7 +60,3 @@ jobs:
         assignees: legnoh
         branch: ${{ env.slug }}
         token: ${{ steps.app-token.outputs.token }}
-    - name: Create Codespace for PullRequest
-      run: |
-        source .github/workflows/github_api.sh
-        create_codespace_for_pr ${{ secrets.CODESPACE_TOKEN }} legnoh legwiki ${{ steps.create-pull-request.outputs.pull-request-number }}
