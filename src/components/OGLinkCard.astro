@@ -1,6 +1,21 @@
 ---
 import ogs from "open-graph-scraper";
 import { setTimeout } from "node:timers/promises";
+import { createLogger, format, transports } from "winston";
+const { combine, timestamp, printf, colorize } = format;
+
+const myFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} [${level}]: ${message}`;
+});
+
+const logger = createLogger({
+  format: combine(
+    colorize(),
+    timestamp({ format: "YYYY-MM-DD HH:mm:ss" }), // タイムスタンプを設定
+    myFormat,
+  ),
+  transports: [new transports.Console()],
+});
 
 interface Props {
   url: string;
@@ -75,10 +90,10 @@ async function getOGPData(url: string) {
   };
   try {
     const { result } = await ogs(options);
-    console.log("fetched OGP data: " + result.ogUrl);
+    logger.info("fetched OGP LinkCard: " + result.ogUrl);
     return result;
   } catch (error) {
-    console.log("Error fetching Open Graph Data:", error);
+    logger.error("Error fetching Open Graph Data:", error);
     return {};
   }
 }
@@ -106,16 +121,16 @@ async function getRakutenAffiliateUrl(item_id: string) {
   );
   const data = await response.text();
   if (data == null) {
-    console.log("getRakutenAffiliateUrl response data is null");
+    logger.warning("getRakutenAffiliateUrl response data is null");
     return null;
   }
   const json_response: RakutenAffiliateResponse = JSON.parse(data);
   if (json_response.count > 0) {
-    console.log("fetched rakuten affiliate url: " + item_id);
+    logger.info("fetched rakuten affiliate(by code): " + item_id);
     return json_response.Items[0].Item.affiliateUrl;
   } else {
-    console.log(
-      "error fetching rakuten affiliate item_id: " +
+    logger.error(
+      "fetching rakuten affiliate url process was failed(by code): " +
         item_id +
         " response: " +
         data,
@@ -150,11 +165,11 @@ async function getRakutenKakakuNaviUrl(keyword: string) {
   }
   const json_response: RakutenKakakuNaviItems = JSON.parse(data);
   if (json_response.count > 0) {
-    console.log("fetched rakuten affiliate(kakakunavi) url: " + keyword);
+    logger.info("fetched rakuten affiliate(by keyword): " + keyword);
     return json_response.Products[0].affiliateUrl;
   } else {
-    console.log(
-      "error fetching rakuten affiliate(kakakunavi) keyword: " +
+    logger.error(
+      "fetching rakuten affiliate url process was failed(by keyword): " +
         keyword +
         " response: " +
         data,
@@ -180,7 +195,7 @@ if (code_rakuten != null) {
 
 <div class="oglc-container">
   <div class="oglc-content">
-    <div class="oglc-text-container">
+    <div class="oglc-left-container">
       <a href={url} class="oglc-title" target="_blank">{title}</a>
       <div class="oglc-description">{description && description}</div>
       <div class="oglc-buttons">
@@ -228,7 +243,7 @@ if (code_rakuten != null) {
     width: 100%;
   }
 
-  .oglc-text-container {
+  .oglc-left-container {
     flex: 1;
     display: flex;
     flex-direction: column;
