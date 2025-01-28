@@ -50,9 +50,11 @@ jobs:
 
     - name: Set Build parameter
       id: build-parameter
+      env:
+        HEAD_REF: ${{ github.head_ref }}
       run: |
         if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
-          echo "root_url=https://${{ github.head_ref }}--legwiki.netlify.app" >> $GITHUB_OUTPUT
+          echo "root_url=https://${HEAD_REF}--legwiki.netlify.app" >> $GITHUB_OUTPUT
           echo "is_production=false" >> $GITHUB_OUTPUT
         else
           echo "root_url=https://legwiki.lkj.io" >> $GITHUB_OUTPUT
