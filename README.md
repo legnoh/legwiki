@@ -1,7 +1,7 @@
 :compass: legwiki 
 ====
 
-[![Publish Workflow Status](https://github.com/legnoh/legwiki/actions/workflows/publish.yml/badge.svg)](https://github.com/legnoh/legwiki/actions/workflows/ci.yml)
+[![Publish Workflow Status](https://github.com/legnoh/legwiki/actions/workflows/ci.yml/badge.svg)](https://github.com/legnoh/legwiki/actions/workflows/ci.yml)
 
 :cherry_blossom: [**legwiki.lkj.io**](https://legwiki.lkj.io) ([legwiki.netlify.app](https://legwiki.netlify.app))
 
