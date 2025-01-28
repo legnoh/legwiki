@@ -1,5 +1,3 @@
-plugins:
-  textlint-plugin-mdx: true
 filters:
   comments: true
 rules:
