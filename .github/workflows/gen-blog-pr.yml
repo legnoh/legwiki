@@ -43,12 +43,10 @@ jobs:
         touch ${image_dir}/.gitkeep
 
         # make blog file
-        erb from_date=${from_date} \
-            to_date=${to_date} \
-            slug=${slug} \
-            src/templates/blog/post.mdx.erb > ${post_dir}/${slug}.mdx
+        FROM_DATE=${from_date} TO_DATE=${to_date} SLUG=${slug} \
+          envsubst < src/templates/blog.mdoc > ${post_dir}/${slug}.mdx
 
-        # set env in global(GitHub Actions)
+        # set output in global(GitHub Actions)
         if [ -n "${GITHUB_ACTION}" ]; then
             echo "from_date=${from_date}" >> $GITHUB_OUTPUT
             echo "to_date=${to_date}" >> $GITHUB_OUTPUT

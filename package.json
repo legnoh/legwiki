@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check && tsc",
-    "lint": "textlint src/content/**"    
+    "lint": "textlint src/content/**"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -19,7 +19,6 @@
     "starlight-blog": "^0.16.1",
     "textlint": "^14.4.2",
     "textlint-filter-rule-comments": "^1.2.2",
-    "textlint-plugin-mdx": "^1.0.1",
     "textlint-rule-preset-japanese": "^10.0.4",
     "typescript": "^5.7.3",
     "vite": "^6.0.11"

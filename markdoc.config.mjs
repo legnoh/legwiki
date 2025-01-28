@@ -5,8 +5,17 @@ import starlightMarkdoc from '@astrojs/starlight-markdoc';
 export default defineMarkdocConfig({
   extends: [starlightMarkdoc()],
   tags: {
+		instagram: {
+			render: component('./src/components/Instagram.astro'),
+			attributes: {
+				url: {
+					type: String,
+					required: true,
+				},
+			},
+		},
     oglinkcard: {
-      render: component('./src/components/Embed/OGLinkCard.astro'),
+      render: component('./src/components/OGLinkCard.astro'),
       attributes: {
         url: {
           type: String,
@@ -46,5 +55,23 @@ export default defineMarkdocConfig({
         },
       },
     },
+		x: {
+			render: component('./src/components/X.astro'),
+			attributes: {
+				url: {
+					type: String,
+					required: true,
+				},
+			},
+		},
+		youtube: {
+			render: component('./src/components/Youtube.astro'),
+			attributes: {
+				url: {
+					type: String,
+					required: true,
+				},
+			},
+		},
   },
 });

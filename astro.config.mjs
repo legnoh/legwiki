@@ -29,7 +29,7 @@ export default defineConfig({
         },
       ],
       components: {
-        MarkdownContent: './src/components/Overrides/MarkdownTemplate.astro',
+        MarkdownContent: './src/components/MarkdownTemplate.astro',
       },
       customCss: [
         './src/styles/custom.css',
