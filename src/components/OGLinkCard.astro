@@ -1,146 +1,180 @@
 ---
-import ogs from 'open-graph-scraper'
+import ogs from "open-graph-scraper";
 import { setTimeout } from "node:timers/promises";
 
 interface Props {
-  url: string
-  title?: string
-  description?: string
-  image?: string
-  fixed?: boolean
-  url_amazon?: string
-  url_yahoo?: string
-  code_rakuten?: string
-  keyword_rakuten?: string
+  url: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  fixed?: boolean;
+  url_amazon?: string;
+  url_yahoo?: string;
+  code_rakuten?: string;
+  keyword_rakuten?: string;
 }
 
 interface RakutenAffiliateResponse {
-  Items: Array<RakutenAffiliateItem>
-  count: number
-  first: number
-  hits: number
-  last: number
-  page: number
-  pageCount: number
-};
+  Items: Array<RakutenAffiliateItem>;
+  count: number;
+  first: number;
+  hits: number;
+  last: number;
+  page: number;
+  pageCount: number;
+}
 
 type RakutenAffiliateItem = {
   Item: {
-    affiliateRate: number
-    affiliateUrl: string
-    availability: number
-    catchcopy: string
-    genreId: number
-    itemCaption: string
-    itemCode: number
-    itemName: string
-    itemPrice: number
-    itemUrl: string
-  }
-}
+    affiliateRate: number;
+    affiliateUrl: string;
+    availability: number;
+    catchcopy: string;
+    genreId: number;
+    itemCaption: string;
+    itemCode: number;
+    itemName: string;
+    itemPrice: number;
+    itemUrl: string;
+  };
+};
 
 interface RakutenKakakuNaviItems {
-  Products: Array<RakutenKakakuNaviItem>
-  count: number
+  Products: Array<RakutenKakakuNaviItem>;
+  count: number;
 }
 
 type RakutenKakakuNaviItem = {
-  affiliateUrl: string
-  productName: string
-}
+  affiliateUrl: string;
+  productName: string;
+};
 
-let { url, title, description, image, fixed, url_amazon, url_yahoo, code_rakuten, keyword_rakuten } = Astro.props
+let {
+  url,
+  title,
+  description,
+  image,
+  fixed,
+  url_amazon,
+  url_yahoo,
+  code_rakuten,
+  keyword_rakuten,
+} = Astro.props;
 
 if (fixed == undefined) {
-  fixed = false
+  fixed = false;
 }
 
 async function getOGPData(url: string) {
-  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36';
-  const options = { url: url, timeout: 100, fetchOptions: { headers: { 'user-agent': userAgent } } }
+  const userAgent =
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36";
+  const options = {
+    url: url,
+    timeout: 100,
+    fetchOptions: { headers: { "user-agent": userAgent } },
+  };
   try {
-    const { result } = await ogs(options)
-    console.log("fetched OGP data: "+result.ogUrl)
-    return result
+    const { result } = await ogs(options);
+    console.log("fetched OGP data: " + result.ogUrl);
+    return result;
   } catch (error) {
-    console.log('Error fetching Open Graph Data:', error)
-    return {}
+    console.log("Error fetching Open Graph Data:", error);
+    return {};
   }
 }
 
 async function getRakutenAffiliateUrl(item_id: string) {
-  const api_url = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601"
-  const [shop_code, item_code] = item_id.split("/")
-  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
-  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID
+  const api_url =
+    "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
+  const [shop_code, item_code] = item_id.split("/");
+  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID;
+  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID;
 
   await setTimeout(Math.random() * 10000);
 
-  const response = await fetch(api_url + "?" + new URLSearchParams({
-      format: 'json',
-      keyword: item_code,
-      shopCode: shop_code,
-      applicationId: application_id,
-      affiliateId: affiliate_id,
-      sort: '+reviewAverage'
-  }).toString());
+  const response = await fetch(
+    api_url +
+      "?" +
+      new URLSearchParams({
+        format: "json",
+        keyword: item_code,
+        shopCode: shop_code,
+        applicationId: application_id,
+        affiliateId: affiliate_id,
+        sort: "+reviewAverage",
+      }).toString(),
+  );
   const data = await response.text();
-  if (data == null){
-    console.log("getRakutenAffiliateUrl response data is null")
-    return null
+  if (data == null) {
+    console.log("getRakutenAffiliateUrl response data is null");
+    return null;
   }
-  const json_response:RakutenAffiliateResponse = JSON.parse(data)
+  const json_response: RakutenAffiliateResponse = JSON.parse(data);
   if (json_response.count > 0) {
-    console.log("fetched rakuten affiliate url: "+ item_id)
-    return json_response.Items[0].Item.affiliateUrl
+    console.log("fetched rakuten affiliate url: " + item_id);
+    return json_response.Items[0].Item.affiliateUrl;
   } else {
-    console.log("error fetching rakuten affiliate item_id: " + item_id + " response: "+ data)
-    return await getRakutenAffiliateUrl(item_id)
+    console.log(
+      "error fetching rakuten affiliate item_id: " +
+        item_id +
+        " response: " +
+        data,
+    );
+    return await getRakutenAffiliateUrl(item_id);
   }
 }
 
 async function getRakutenKakakuNaviUrl(keyword: string) {
-  const api_url = "https://app.rakuten.co.jp/services/api/Product/Search/20170426"
-  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID
-  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID
+  const api_url =
+    "https://app.rakuten.co.jp/services/api/Product/Search/20170426";
+  const application_id = import.meta.env.RAKUTEN_APPLICATION_ID;
+  const affiliate_id = import.meta.env.RAKUTEN_AFFILIATE_ID;
 
   await setTimeout(Math.random() * 10000);
 
-  const response = await fetch(api_url + "?" + new URLSearchParams({
-      format: 'json',
-      formatVersion: '2',
-      keyword: keyword,
-      applicationId: application_id,
-      affiliateId: affiliate_id,
-      elements: 'count,affiliateUrl,productName',
-  }).toString());
+  const response = await fetch(
+    api_url +
+      "?" +
+      new URLSearchParams({
+        format: "json",
+        formatVersion: "2",
+        keyword: keyword,
+        applicationId: application_id,
+        affiliateId: affiliate_id,
+        elements: "count,affiliateUrl,productName",
+      }).toString(),
+  );
   const data = await response.text();
-  if (data == null){
-    return null
+  if (data == null) {
+    return null;
   }
-  const json_response:RakutenKakakuNaviItems = JSON.parse(data)
+  const json_response: RakutenKakakuNaviItems = JSON.parse(data);
   if (json_response.count > 0) {
-    console.log("fetched rakuten affiliate(kakakunavi) url: "+ keyword)
-    return json_response.Products[0].affiliateUrl
+    console.log("fetched rakuten affiliate(kakakunavi) url: " + keyword);
+    return json_response.Products[0].affiliateUrl;
   } else {
-    console.log("error fetching rakuten affiliate(kakakunavi) keyword: " + keyword + " response: "+ data)
-    return await getRakutenKakakuNaviUrl(keyword)
+    console.log(
+      "error fetching rakuten affiliate(kakakunavi) keyword: " +
+        keyword +
+        " response: " +
+        data,
+    );
+    return await getRakutenKakakuNaviUrl(keyword);
   }
 }
 
-const ogpdata = await getOGPData(url)
+const ogpdata = await getOGPData(url);
 if (fixed == false) {
-  title = ogpdata?.ogTitle || 'no title'
-  image = ogpdata?.ogImage?.[0]?.url || undefined
-  description = ogpdata?.ogDescription || undefined
+  title = ogpdata?.ogTitle || "no title";
+  image = ogpdata?.ogImage?.[0]?.url || undefined;
+  description = ogpdata?.ogDescription || undefined;
 }
 
-
-let url_rakuten_affiliate = null
+let url_rakuten_affiliate = null;
 if (code_rakuten != null) {
-  url_rakuten_affiliate = await getRakutenAffiliateUrl(code_rakuten)
+  url_rakuten_affiliate = await getRakutenAffiliateUrl(code_rakuten);
 } else if (keyword_rakuten != null) {
-  url_rakuten_affiliate = await getRakutenKakakuNaviUrl(keyword_rakuten)
+  url_rakuten_affiliate = await getRakutenKakakuNaviUrl(keyword_rakuten);
 }
 ---
 
@@ -148,15 +182,32 @@ if (code_rakuten != null) {
   <div class="oglc-content">
     <div class="oglc-text-container">
       <a href={url} class="oglc-title" target="_blank">{title}</a>
-      {description && <div class="oglc-description">{description}</div>}
+      <div class="oglc-description">{description && description}</div>
+      <div class="oglc-buttons">
+        {
+          url_amazon && (
+            <a href={url_amazon} class="oglc-btn" target="_blank">
+              Amazon
+            </a>
+          )
+        }
+        {
+          url_yahoo && (
+            <a href={url_yahoo} class="oglc-btn" target="_blank">
+              Yahoo!
+            </a>
+          )
+        }
+        {
+          url_rakuten_affiliate && (
+            <a href={url_rakuten_affiliate} class="oglc-btn" target="_blank">
+              楽天
+            </a>
+          )
+        }
+      </div>
     </div>
     {image && <img class="oglc-image" src={image} alt="Image" />}
-  </div>
-
-  <div class="oglc-buttons">
-    {url_amazon && <a href={url_amazon} class="oglc-btn" target="_blank">Amazon</a>}
-    {url_yahoo && <a href={url_yahoo} class="oglc-btn" target="_blank">Yahoo!</a>}
-    {url_rakuten_affiliate && <a href={url_rakuten_affiliate} class="oglc-btn" target="_blank">楽天</a>}
   </div>
 </div>
 
@@ -175,7 +226,6 @@ if (code_rakuten != null) {
     display: flex;
     align-items: flex-start;
     width: 100%;
-    margin-bottom: 12px;
   }
 
   .oglc-text-container {
@@ -191,11 +241,19 @@ if (code_rakuten != null) {
     margin-bottom: 8px;
     color: #333;
     text-decoration: none;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .oglc-description {
     font-size: 0.9em;
     color: #555;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
   }
 
   .oglc-image {
@@ -203,12 +261,12 @@ if (code_rakuten != null) {
     height: auto;
     object-fit: cover;
     flex-shrink: 0;
+    margin-top: 0;
   }
 
   .oglc-buttons {
     display: flex;
     gap: 8px;
-    margin-top: 12px;
   }
 
   .oglc-btn {
