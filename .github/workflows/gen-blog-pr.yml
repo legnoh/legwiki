@@ -44,7 +44,7 @@ jobs:
 
         # make blog file
         FROM_DATE=${from_date} TO_DATE=${to_date} SLUG=${slug} \
-          envsubst < src/templates/blog.mdoc > ${post_dir}/${slug}.mdx
+          envsubst < src/templates/blog.mdoc > ${post_dir}/${slug}.mdoc
 
         # set output in global(GitHub Actions)
         if [ -n "${GITHUB_ACTION}" ]; then
