@@ -17,7 +17,7 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha || github.sha }}
         lfs: true
-    
+
     - name: Check Project Node version
       id: check-node-version
       run: echo "node_version=$(jq -r ".volta.node" package.json)" >> $GITHUB_OUTPUT
