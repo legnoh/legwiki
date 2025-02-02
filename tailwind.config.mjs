@@ -7,8 +7,6 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				// Your preferred accent color. Indigo is closest to Starlight’s defaults.
-				accent: colors.rose,
 			},
 		},
 	},

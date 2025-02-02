@@ -51,7 +51,7 @@ export default defineConfig({
             legnoh: {
               name: 'legnoh',
               title: 'Internet seniors\' association',
-              picture: '/img/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
+              picture: '/avatar/legnoh.jpeg', // Images in the `public` directory are supported.
               url: 'https://twitter.com/legnoh',
             },
           },

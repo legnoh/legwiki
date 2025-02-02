@@ -35,8 +35,8 @@ jobs:
         slug=${year}-${week}
         to_date=$(date '+%Y-%m-%d' --date "${sunday}")
         from_date=$(date '+%Y-%m-%d' --date "6 day ago ${to_date}")
-        post_dir=src/content/docs/blog
-        image_dir=public/img/blog/${slug}
+        post_dir=src/content/docs/blog/${year}/${week}
+        image_dir=src/content/docs/blog/${year}/${week}/img
 
         # mkdir, hero alias
         mkdir -p ${image_dir}
