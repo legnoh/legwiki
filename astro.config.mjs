@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
+import tailwind from '@astrojs/tailwind';
 import markdoc from '@astrojs/markdoc';
 import { loadEnv } from "vite";
 
@@ -32,6 +33,7 @@ export default defineConfig({
         MarkdownContent: './src/components/MarkdownTemplate.astro',
       },
       customCss: [
+        './src/styles/tailwind.css',
         './src/styles/custom.css',
       ],
       tableOfContents: {
@@ -75,6 +77,9 @@ export default defineConfig({
         youtube: 'https://www.youtube.com/@legnoh',
         github: 'https://github.com/legnoh',
       },
+    }),
+    tailwind({
+      applyBaseStyles: false,
     }),
   ],
 });

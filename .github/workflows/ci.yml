@@ -29,7 +29,7 @@ jobs:
         cache: npm
 
     - name: Run npm ci
-      run: npm ci
+      run: npm ci --include=dev
 
     - name: Get GitHub App Token
       if: github.event_name == 'pull_request_target'
