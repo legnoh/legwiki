@@ -21,7 +21,7 @@
     "textlint": "^14.4.2",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-japanese": "^10.0.4",
-    "typescript": "^5.7.3",
+    "typescript": "^5.8.2",
     "vite": "^6.1.1",
     "winston": "^3.17.0"
   },
