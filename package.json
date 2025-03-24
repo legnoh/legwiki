@@ -15,7 +15,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/markdoc": "^0.12.10",
     "@astrojs/starlight-markdoc": "^0.3.0",
-    "@astrojs/starlight-tailwind": "^3.0.0",
+    "@astrojs/starlight-tailwind": "^3.0.1",
     "open-graph-scraper": "^6.9.0",
     "starlight-blog": "^0.18.0",
     "textlint": "^14.5.0",
