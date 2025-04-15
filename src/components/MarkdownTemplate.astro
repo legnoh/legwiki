@@ -1,6 +1,5 @@
 ---
 import Default from '../../node_modules/starlight-blog/overrides/MarkdownContent.astro';
-import type { Props } from '@astrojs/starlight/props';
 ---
 
 <!-- Affiliate LinkSwitch -->
@@ -9,6 +8,4 @@ import type { Props } from '@astrojs/starlight/props';
 </script>
 <script async is:inline type="text/javascript" src="//aml.valuecommerce.com/vcdal.js" async is:inline></script>
 
-<Default {...Astro.props}>
-    <slot/>
-</Default>
+<Default><slot/></Default>

@@ -71,12 +71,12 @@ export default defineConfig({
           ]
         },
       ],
-      social: {
-        'x.com': 'https://x.com/legnoh',
-        instagram: 'https://www.instagram.com/legnoh/',
-        youtube: 'https://www.youtube.com/@legnoh',
-        github: 'https://github.com/legnoh',
-      },
+      social: [
+        { icon: 'x.com', label: 'X', href: 'https://x.com/legnoh' },
+        { icon: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/legnoh/' },
+        { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@legnoh' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/legnoh' },
+      ],
     }),
     tailwind({
       applyBaseStyles: false,
