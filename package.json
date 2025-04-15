@@ -8,12 +8,13 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro check && tsc",
+    "check": "astro check",
     "lint": "textlint src/content/**"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/markdoc": "^0.12.10",
+    "@astrojs/starlight": "^0.33.2",
     "@astrojs/starlight-markdoc": "^0.3.0",
     "@astrojs/starlight-tailwind": "^3.0.1",
     "open-graph-scraper": "^6.9.0",
