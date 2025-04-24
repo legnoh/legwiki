@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from "@astrojs/starlight";
 import starlightBlog from 'starlight-blog';
-import tailwind from '@astrojs/tailwind';
 import markdoc from '@astrojs/markdoc';
 import { loadEnv } from "vite";
 
