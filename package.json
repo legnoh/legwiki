@@ -20,7 +20,7 @@
     "@tailwindcss/vite": "^4.1.4",
     "open-graph-scraper": "^6.10.0",
     "starlight-blog": "^0.21.0",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.5",
     "textlint": "^14.6.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-japanese": "^10.0.4",
