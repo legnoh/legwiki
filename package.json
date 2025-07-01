@@ -21,7 +21,7 @@
     "open-graph-scraper": "^6.10.0",
     "starlight-blog": "^0.24.0",
     "tailwindcss": "^4.1.11",
-    "textlint": "^14.8.4",
+    "textlint": "^15.1.0",
     "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-preset-japanese": "^10.0.4",
     "typescript": "^5.8.3",
