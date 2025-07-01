@@ -123,7 +123,7 @@ slug: blog/2025-26
 
 {% x url="https://twitter.com/legnoh/status/1867119164697219124" / %}
 
-これまで生活のメトリクスを取る目的でAPIを利用可能なTodoistを利用していたものの、毎月課金が必要なのが微妙に感じられ、Apple純正のリマインダーで代用できないかと考えた。
+これまで生活のメトリクスを取る目的でAPIを利用可能なTodoistを利用していたものの、月課金が微妙に感じられ、Apple純正のリマインダーで代用できないかと考えた。
 
 その結果、macOS上でリマインダーのデータを取得するPrometheus ExporterをGoで実装した。最終的には、[reminders-cli](https://github.com/keith/reminders-cli)（Swift製CLI）を`os.Exec`で叩く構成に。GoでPrometheus Exporterを作るのは今回が初めてだったが、Pythonに比べるとややクセはあるものの、主流ライブラリが整っているのは好印象だった。
 
