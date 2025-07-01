@@ -4,3 +4,6 @@ rules:
   preset-japanese:
     sentence-length:
       max: 1000
+plugins:
+  "@textlint/markdown":
+    extensions: [".mdoc"]
