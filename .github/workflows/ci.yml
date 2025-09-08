@@ -35,7 +35,7 @@ jobs:
       run: echo "node_version=$(jq -r ".volta.node" package.json)" >> $GITHUB_OUTPUT
 
     - name: Setup Node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v5
       with:
         node-version: ${{ steps.check-node-version.outputs.node_version }}
         cache: npm
