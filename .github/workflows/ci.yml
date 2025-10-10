@@ -51,6 +51,7 @@ jobs:
       with:
         app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
+        permission-statuses: write
         permission-pull-requests: write
         permission-deployments: write
 
