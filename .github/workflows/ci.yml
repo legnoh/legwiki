@@ -5,7 +5,7 @@ permissions:
 on:
   push:
     branches: ["main"]
-  pull_request_target:
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
@@ -16,8 +16,6 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v5
-      with:
-        ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
     - name: Create LFS file list
       run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
@@ -47,7 +45,7 @@ jobs:
       run: npm ci --include=dev
 
     - name: Get GitHub App Token
-      if: github.event_name == 'pull_request_target'
+      if: github.event_name == 'pull_request'
       uses: actions/create-github-app-token@v2
       id: github-app
       with:
@@ -56,7 +54,7 @@ jobs:
         permission-pull-requests: write
 
     - name: Textlint to PR
-      if: github.event_name == 'pull_request_target'
+      if: github.event_name == 'pull_request'
       uses: tsuyoshicho/action-textlint@v3
       with:
         github_token: ${{ steps.github-app.outputs.token }}
@@ -69,7 +67,7 @@ jobs:
       env:
         HEAD_REF: ${{ github.head_ref }}
       run: |
-        if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "root_url=https://${HEAD_REF}--legwiki.netlify.app" >> $GITHUB_OUTPUT
           echo "is_production=false" >> $GITHUB_OUTPUT
         else
