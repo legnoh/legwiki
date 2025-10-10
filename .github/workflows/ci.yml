@@ -5,7 +5,7 @@ permissions:
 on:
   push:
     branches: ["main"]
-  pull_request_target:
+  pull_request:
     branches: ["main"]
   workflow_dispatch:
 
@@ -16,8 +16,6 @@ jobs:
 
     - name: Checkout repository
       uses: actions/checkout@v5
-      with:
-        ref: ${{ github.event.pull_request.head.sha || github.sha }}
 
     - name: Create LFS file list
       run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
@@ -47,15 +45,16 @@ jobs:
       run: npm ci --include=dev
 
     - name: Get GitHub App Token
-      if: github.event_name == 'pull_request_target'
+      if: github.event_name == 'pull_request'
       uses: actions/create-github-app-token@v2
       id: github-app
       with:
         app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
+        permission-pull-requests: write
 
     - name: Textlint to PR
-      if: github.event_name == 'pull_request_target'
+      if: github.event_name == 'pull_request'
       uses: tsuyoshicho/action-textlint@v3
       with:
         github_token: ${{ steps.github-app.outputs.token }}
@@ -68,7 +67,7 @@ jobs:
       env:
         HEAD_REF: ${{ github.head_ref }}
       run: |
-        if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
+        if [[ "${{ github.event_name }}" == "pull_request" ]]; then
           echo "root_url=https://${HEAD_REF}--legwiki.netlify.app" >> $GITHUB_OUTPUT
           echo "is_production=false" >> $GITHUB_OUTPUT
         else
@@ -82,8 +81,8 @@ jobs:
     - name: Run astro build
       run: npm run build
       env:
-        RAKUTEN_APPLICATION_ID:  ${{ secrets.RAKUTEN_APPLICATION_ID }}
-        RAKUTEN_AFFILIATE_ID:  ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        RAKUTEN_APPLICATION_ID: "1002645405603330201"
+        RAKUTEN_AFFILIATE_ID: "432465f0.189b5bea.432465f1.352bed4f"
         ROOT_URL: ${{ steps.build-parameter.outputs.root_url }}
 
     - name: Deploy to Netlify
@@ -92,7 +91,7 @@ jobs:
         alias: ${{ github.head_ref }}
         publish-dir: './dist'
         production-deploy: ${{ steps.build-parameter.outputs.is_production }}
-        github-token: ${{ github.token }}
+        github-token: ${{ steps.github-app.outputs.token }}
         enable-commit-comment: false
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
