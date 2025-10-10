@@ -52,6 +52,7 @@ jobs:
         app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
         permission-pull-requests: write
+        permission-deployments: write
 
     - name: Textlint to PR
       if: github.event_name == 'pull_request'
