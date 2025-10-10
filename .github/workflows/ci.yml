@@ -53,6 +53,7 @@ jobs:
       with:
         app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
+        permission-pull-requests: write
 
     - name: Textlint to PR
       if: github.event_name == 'pull_request_target'
@@ -82,8 +83,8 @@ jobs:
     - name: Run astro build
       run: npm run build
       env:
-        RAKUTEN_APPLICATION_ID:  ${{ secrets.RAKUTEN_APPLICATION_ID }}
-        RAKUTEN_AFFILIATE_ID:  ${{ secrets.RAKUTEN_AFFILIATE_ID }}
+        RAKUTEN_APPLICATION_ID: "1002645405603330201"
+        RAKUTEN_AFFILIATE_ID: "432465f0.189b5bea.432465f1.352bed4f"
         ROOT_URL: ${{ steps.build-parameter.outputs.root_url }}
 
     - name: Deploy to Netlify
@@ -92,7 +93,7 @@ jobs:
         alias: ${{ github.head_ref }}
         publish-dir: './dist'
         production-deploy: ${{ steps.build-parameter.outputs.is_production }}
-        github-token: ${{ github.token }}
+        github-token: ${{ steps.github-app.outputs.token }}
         enable-commit-comment: false
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
