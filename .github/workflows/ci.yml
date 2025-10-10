@@ -49,7 +49,7 @@ jobs:
       uses: actions/create-github-app-token@v2
       id: github-app
       with:
-        app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
+        app-id: ${{ vars.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
         permission-statuses: write
         permission-pull-requests: write
