@@ -19,7 +19,7 @@
     "@astrojs/starlight-tailwind": "^4.0.2",
     "@tailwindcss/vite": "^4.1.16",
     "open-graph-scraper": "^6.10.0",
-    "starlight-blog": "^0.24.3",
+    "starlight-blog": "^0.25.0",
     "tailwindcss": "^4.1.16",
     "textlint": "^15.2.3",
     "textlint-filter-rule-comments": "^1.2.2",
