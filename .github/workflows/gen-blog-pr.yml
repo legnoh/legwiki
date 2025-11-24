@@ -21,7 +21,7 @@ jobs:
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
 
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
 
     - name: Add Post Directory
       id: post-dir
