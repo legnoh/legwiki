@@ -14,7 +14,7 @@ jobs:
     steps:
 
     - name: Get GitHub App Token
-      uses: actions/create-github-app-token@v2
+      uses: actions/create-github-app-token@v3
       id: github-app
       with:
         app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
