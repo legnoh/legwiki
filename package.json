@@ -12,7 +12,7 @@
     "lint": "textlint src/content/**"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.8",
     "@astrojs/markdoc": "^0.15.10",
     "@astrojs/starlight": "^0.37.7",
     "@astrojs/starlight-markdoc": "^0.5.1",
