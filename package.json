@@ -17,7 +17,7 @@
     "@astrojs/starlight": "^0.38.1",
     "@astrojs/starlight-markdoc": "^0.6.0",
     "@astrojs/starlight-tailwind": "^5.0.0",
-    "@tailwindcss/vite": "^4.2.1",
+    "@tailwindcss/vite": "^4.2.2",
     "open-graph-scraper": "^6.11.0",
     "starlight-blog": "^0.26.1",
     "tailwindcss": "^4.2.2",
