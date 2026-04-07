@@ -1,5 +1,16 @@
 ---
 import ogs from "open-graph-scraper";
+import {
+  closeSync,
+  existsSync,
+  mkdirSync,
+  openSync,
+  readFileSync,
+  renameSync,
+  unlinkSync,
+  writeFileSync,
+} from "node:fs";
+import { fileURLToPath } from "node:url";
 import { setTimeout } from "node:timers/promises";
 import { createLogger, format, transports } from "winston";
 const { combine, timestamp, printf, colorize } = format;
@@ -64,6 +75,132 @@ type RakutenKakakuNaviItem = {
   productName: string;
 };
 
+const projectRoot = fileURLToPath(new URL('../../..', import.meta.url));
+const cacheDirPath = `${projectRoot}/.astro`;
+const cacheFilePath = `${cacheDirPath}/oglinkcard-rakuten-cache.json`;
+const cacheLockPath = `${cacheFilePath}.lock`;
+
+type CachedOGPData = {
+  ogUrl?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: Array<{ url?: string }>;
+};
+
+const rakutenAffiliateCache = new Map<string, string | null>();
+const rakutenKakakuNaviCache = new Map<string, string | null>();
+const ogpDataCache = new Map<string, CachedOGPData | null>();
+
+function loadRakutenCacheFile() {
+  if (!existsSync(cacheFilePath)) {
+    return;
+  }
+
+  try {
+    const raw = readFileSync(cacheFilePath, "utf8");
+    if (!raw) {
+      return;
+    }
+
+    const parsed = JSON.parse(raw);
+    if (parsed?.rakutenAffiliate && typeof parsed.rakutenAffiliate === "object") {
+      for (const [key, value] of Object.entries(parsed.rakutenAffiliate)) {
+        rakutenAffiliateCache.set(key, value as string | null);
+      }
+    }
+    if (parsed?.rakutenKakakuNavi && typeof parsed.rakutenKakakuNavi === "object") {
+      for (const [key, value] of Object.entries(parsed.rakutenKakakuNavi)) {
+        rakutenKakakuNaviCache.set(key, value as string | null);
+      }
+    }
+    if (parsed?.ogpData && typeof parsed.ogpData === "object") {
+      for (const [key, value] of Object.entries(parsed.ogpData)) {
+        ogpDataCache.set(key, value as CachedOGPData | null);
+      }
+    }
+  } catch (error) {
+    logger.warn("Failed to load Rakuten cache file: " + error);
+  }
+}
+
+async function acquireCacheLock(retries = 50, delayMs = 100) {
+  for (let attempt = 0; attempt < retries; attempt += 1) {
+    try {
+      return openSync(cacheLockPath, "wx");
+    } catch (error: any) {
+      if (error?.code !== "EEXIST") {
+        throw error;
+      }
+      await setTimeout(delayMs);
+    }
+  }
+  throw new Error("Could not acquire Rakuten cache lock after retries");
+}
+
+function releaseCacheLock(fd: number) {
+  try {
+    closeSync(fd);
+  } catch (error) {
+    logger.warn("Failed to close Rakuten cache lock fd: " + error);
+  }
+  try {
+    unlinkSync(cacheLockPath);
+  } catch (error) {
+    logger.warn("Failed to remove Rakuten cache lock file: " + error);
+  }
+}
+
+async function saveRakutenCacheFile() {
+  let lockFd;
+  try {
+    lockFd = await acquireCacheLock();
+
+    if (!existsSync(cacheDirPath)) {
+      mkdirSync(cacheDirPath, { recursive: true });
+    }
+
+    let diskData: {
+      rakutenAffiliate?: Record<string, string | null>;
+      rakutenKakakuNavi?: Record<string, string | null>;
+      ogpData?: Record<string, CachedOGPData | null>;
+    } = {};
+
+    if (existsSync(cacheFilePath)) {
+      const raw = readFileSync(cacheFilePath, "utf8");
+      if (raw) {
+        diskData = JSON.parse(raw);
+      }
+    }
+
+    const merged = {
+      rakutenAffiliate: {
+        ...(diskData.rakutenAffiliate ?? {}),
+        ...Object.fromEntries(rakutenAffiliateCache),
+      },
+      rakutenKakakuNavi: {
+        ...(diskData.rakutenKakakuNavi ?? {}),
+        ...Object.fromEntries(rakutenKakakuNaviCache),
+      },
+      ogpData: {
+        ...(diskData.ogpData ?? {}),
+        ...Object.fromEntries(ogpDataCache),
+      },
+    };
+
+    const tmpPath = `${cacheFilePath}.tmp`;
+    writeFileSync(tmpPath, JSON.stringify(merged, null, 2), "utf8");
+    renameSync(tmpPath, cacheFilePath);
+  } catch (error) {
+    logger.warn("Failed to save Rakuten cache file: " + error);
+  } finally {
+    if (typeof lockFd === "number") {
+      releaseCacheLock(lockFd);
+    }
+  }
+}
+
+loadRakutenCacheFile();
+
 let {
   url,
   title,
@@ -81,6 +218,10 @@ if (fixed == undefined) {
 }
 
 async function getOGPData(url: string) {
+  if (ogpDataCache.has(url)) {
+    return ogpDataCache.get(url) ?? {};
+  }
+
   const userAgent =
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36";
   const options = {
@@ -90,15 +231,31 @@ async function getOGPData(url: string) {
   };
   try {
     const { result } = await ogs(options);
+    const cacheValue: CachedOGPData = {
+      ogUrl: result?.ogUrl,
+      ogTitle: result?.ogTitle,
+      ogDescription: result?.ogDescription,
+      ogImage: Array.isArray(result?.ogImage)
+        ? result.ogImage.map((image: any) => ({ url: image?.url }))
+        : undefined,
+    };
+    ogpDataCache.set(url, cacheValue);
+    await saveRakutenCacheFile();
     logger.info("fetched OGP LinkCard: " + result.ogUrl);
-    return result;
+    return cacheValue;
   } catch (error) {
     logger.error("Error fetching Open Graph Data:", error);
+    ogpDataCache.set(url, null);
+    await saveRakutenCacheFile();
     return {};
   }
 }
 
 async function getRakutenAffiliateUrl(item_id: string) {
+  if (rakutenAffiliateCache.has(item_id)) {
+    return rakutenAffiliateCache.get(item_id) ?? null;
+  }
+
   const api_url =
     "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
   const [shop_code, item_code] = item_id.split("/");
@@ -122,24 +279,36 @@ async function getRakutenAffiliateUrl(item_id: string) {
   const data = await response.text();
   if (data == null) {
     logger.warning("getRakutenAffiliateUrl response data is null");
+    rakutenAffiliateCache.set(item_id, null);
+    await saveRakutenCacheFile();
     return null;
   }
+
   const json_response: RakutenAffiliateResponse = JSON.parse(data);
   if (json_response.count > 0) {
+    const affiliateUrl = json_response.Items[0].Item.affiliateUrl;
     logger.info("fetched rakuten affiliate(by code): " + item_id);
-    return json_response.Items[0].Item.affiliateUrl;
-  } else {
-    logger.error(
-      "fetching rakuten affiliate url process was failed(by code): " +
-        item_id +
-        " response: " +
-        data,
-    );
-    return await getRakutenAffiliateUrl(item_id);
+    rakutenAffiliateCache.set(item_id, affiliateUrl);
+    await saveRakutenCacheFile();
+    return affiliateUrl;
   }
+
+  logger.error(
+    "fetching rakuten affiliate url process was failed(by code): " +
+      item_id +
+      " response: " +
+      data,
+  );
+  rakutenAffiliateCache.set(item_id, null);
+  await saveRakutenCacheFile();
+  return null;
 }
 
 async function getRakutenKakakuNaviUrl(keyword: string) {
+  if (rakutenKakakuNaviCache.has(keyword)) {
+    return rakutenKakakuNaviCache.get(keyword) ?? null;
+  }
+
   const api_url =
     "https://app.rakuten.co.jp/services/api/Product/Search/20170426";
   const application_id = import.meta.env.RAKUTEN_APPLICATION_ID;
@@ -161,21 +330,29 @@ async function getRakutenKakakuNaviUrl(keyword: string) {
   );
   const data = await response.text();
   if (data == null) {
+    rakutenKakakuNaviCache.set(keyword, null);
+    await saveRakutenCacheFile();
     return null;
   }
+
   const json_response: RakutenKakakuNaviItems = JSON.parse(data);
   if (json_response.count > 0) {
+    const affiliateUrl = json_response.Products[0].affiliateUrl;
     logger.info("fetched rakuten affiliate(by keyword): " + keyword);
-    return json_response.Products[0].affiliateUrl;
-  } else {
-    logger.error(
-      "fetching rakuten affiliate url process was failed(by keyword): " +
-        keyword +
-        " response: " +
-        data,
-    );
-    return await getRakutenKakakuNaviUrl(keyword);
+    rakutenKakakuNaviCache.set(keyword, affiliateUrl);
+    await saveRakutenCacheFile();
+    return affiliateUrl;
   }
+
+  logger.error(
+    "fetching rakuten affiliate url process was failed(by keyword): " +
+      keyword +
+      " response: " +
+      data,
+  );
+  rakutenKakakuNaviCache.set(keyword, null);
+  await saveRakutenCacheFile();
+  return null;
 }
 
 const ogpdata = await getOGPData(url);
