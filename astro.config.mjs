@@ -85,6 +85,9 @@ export default defineConfig({
     plugins: [
       tailwindcss()
     ],
+    resolve: {
+      tsconfigPaths: false,
+    },
     ssr: {
       noExternal: ['@tailwindcss/vite']
     }
