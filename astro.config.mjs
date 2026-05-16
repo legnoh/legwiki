@@ -82,8 +82,10 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [tailwindcss(
-      tsconfigPaths: true,
-    )],
+    plugins: [
+      tailwindcss({
+        tsconfigPaths: true,
+      })
+    ],
   },
 });
