@@ -80,7 +80,7 @@ jobs:
         ROOT_URL: ${{ steps.build-parameter.outputs.root_url }}
 
     - name: Deploy to Netlify
-      uses: nwtgck/actions-netlify@v3.0
+      uses: nwtgck/actions-netlify@v4.0
       with:
         alias: ${{ github.head_ref }}
         publish-dir: './dist'
