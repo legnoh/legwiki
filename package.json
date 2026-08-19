@@ -21,7 +21,7 @@
     "astro": "^7.2.3",
     "@tailwindcss/vite": "^4.3.3",
     "open-graph-scraper": "^6.12.0",
-    "starlight-blog": "^0.28.0",
+    "starlight-blog": "^0.29.0",
     "tailwindcss": "^4.3.3",
     "textlint": "^15.8.0",
     "textlint-filter-rule-comments": "^1.3.0",
