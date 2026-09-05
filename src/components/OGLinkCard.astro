@@ -264,44 +264,51 @@ async function getRakutenAffiliateUrl(item_id: string) {
 
   await setTimeout(Math.random() * 10000);
 
-  const response = await fetch(
-    api_url +
-      "?" +
-      new URLSearchParams({
-        format: "json",
-        keyword: item_code,
-        shopCode: shop_code,
-        applicationId: application_id,
-        affiliateId: affiliate_id,
-        sort: "+reviewAverage",
-      }).toString(),
-  );
-  const data = await response.text();
-  if (data == null) {
-    logger.warning("getRakutenAffiliateUrl response data is null");
+  try {
+    const response = await fetch(
+      api_url +
+        "?" +
+        new URLSearchParams({
+          format: "json",
+          keyword: item_code,
+          shopCode: shop_code,
+          applicationId: application_id,
+          affiliateId: affiliate_id,
+          sort: "+reviewAverage",
+        }).toString(),
+    );
+    const data = await response.text();
+    if (data == null) {
+      logger.warn("getRakutenAffiliateUrl response data is null");
+      rakutenAffiliateCache.set(item_id, null);
+      await saveRakutenCacheFile();
+      return null;
+    }
+
+    const json_response: RakutenAffiliateResponse = JSON.parse(data);
+    if (json_response.count > 0) {
+      const affiliateUrl = json_response.Items[0].Item.affiliateUrl;
+      logger.info("fetched rakuten affiliate(by code): " + item_id);
+      rakutenAffiliateCache.set(item_id, affiliateUrl);
+      await saveRakutenCacheFile();
+      return affiliateUrl;
+    }
+
+    logger.error(
+      "fetching rakuten affiliate url process was failed(by code): " +
+        item_id +
+        " response: " +
+        data,
+    );
+    rakutenAffiliateCache.set(item_id, null);
+    await saveRakutenCacheFile();
+    return null;
+  } catch (error) {
+    logger.error("fetching rakuten affiliate url process threw error(by code): " + item_id, error);
     rakutenAffiliateCache.set(item_id, null);
     await saveRakutenCacheFile();
     return null;
   }
-
-  const json_response: RakutenAffiliateResponse = JSON.parse(data);
-  if (json_response.count > 0) {
-    const affiliateUrl = json_response.Items[0].Item.affiliateUrl;
-    logger.info("fetched rakuten affiliate(by code): " + item_id);
-    rakutenAffiliateCache.set(item_id, affiliateUrl);
-    await saveRakutenCacheFile();
-    return affiliateUrl;
-  }
-
-  logger.error(
-    "fetching rakuten affiliate url process was failed(by code): " +
-      item_id +
-      " response: " +
-      data,
-  );
-  rakutenAffiliateCache.set(item_id, null);
-  await saveRakutenCacheFile();
-  return null;
 }
 
 async function getRakutenKakakuNaviUrl(keyword: string) {
@@ -316,43 +323,50 @@ async function getRakutenKakakuNaviUrl(keyword: string) {
 
   await setTimeout(Math.random() * 10000);
 
-  const response = await fetch(
-    api_url +
-      "?" +
-      new URLSearchParams({
-        format: "json",
-        formatVersion: "2",
-        keyword: keyword,
-        applicationId: application_id,
-        affiliateId: affiliate_id,
-        elements: "count,affiliateUrl,productName",
-      }).toString(),
-  );
-  const data = await response.text();
-  if (data == null) {
+  try {
+    const response = await fetch(
+      api_url +
+        "?" +
+        new URLSearchParams({
+          format: "json",
+          formatVersion: "2",
+          keyword: keyword,
+          applicationId: application_id,
+          affiliateId: affiliate_id,
+          elements: "count,affiliateUrl,productName",
+        }).toString(),
+    );
+    const data = await response.text();
+    if (data == null) {
+      rakutenKakakuNaviCache.set(keyword, null);
+      await saveRakutenCacheFile();
+      return null;
+    }
+
+    const json_response: RakutenKakakuNaviItems = JSON.parse(data);
+    if (json_response.count > 0) {
+      const affiliateUrl = json_response.Products[0].affiliateUrl;
+      logger.info("fetched rakuten affiliate(by keyword): " + keyword);
+      rakutenKakakuNaviCache.set(keyword, affiliateUrl);
+      await saveRakutenCacheFile();
+      return affiliateUrl;
+    }
+
+    logger.error(
+      "fetching rakuten affiliate url process was failed(by keyword): " +
+        keyword +
+        " response: " +
+        data,
+    );
+    rakutenKakakuNaviCache.set(keyword, null);
+    await saveRakutenCacheFile();
+    return null;
+  } catch (error) {
+    logger.error("fetching rakuten affiliate url process threw error(by keyword): " + keyword, error);
     rakutenKakakuNaviCache.set(keyword, null);
     await saveRakutenCacheFile();
     return null;
   }
-
-  const json_response: RakutenKakakuNaviItems = JSON.parse(data);
-  if (json_response.count > 0) {
-    const affiliateUrl = json_response.Products[0].affiliateUrl;
-    logger.info("fetched rakuten affiliate(by keyword): " + keyword);
-    rakutenKakakuNaviCache.set(keyword, affiliateUrl);
-    await saveRakutenCacheFile();
-    return affiliateUrl;
-  }
-
-  logger.error(
-    "fetching rakuten affiliate url process was failed(by keyword): " +
-      keyword +
-      " response: " +
-      data,
-  );
-  rakutenKakakuNaviCache.set(keyword, null);
-  await saveRakutenCacheFile();
-  return null;
 }
 
 const ogpdata = await getOGPData(url);

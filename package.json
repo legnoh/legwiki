@@ -15,7 +15,7 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/markdoc": "^2.0.9",
     "@astrojs/markdown-remark": "7.3.0",
-    "@astrojs/starlight": "^0.41.11",
+    "@astrojs/starlight": "^0.42.0",
     "@astrojs/starlight-markdoc": "^0.7.0",
     "@astrojs/starlight-tailwind": "^5.0.0",
     "astro": "^7.3.1",
@@ -31,5 +31,8 @@
   },
   "volta": {
     "node": "24.20.0"
+  },
+  "overrides": {
+    "satteri": "^0.10.5"
   }
 }
