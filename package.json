@@ -31,5 +31,8 @@
   },
   "volta": {
     "node": "24.20.0"
+  },
+  "overrides": {
+    "satteri": "^0.10.5"
   }
 }
