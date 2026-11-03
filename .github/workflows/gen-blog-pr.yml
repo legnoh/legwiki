@@ -17,7 +17,7 @@ jobs:
       uses: actions/create-github-app-token@v3
       id: github-app
       with:
-        app-id: ${{ secrets.EDITOR_BOT_APP_ID }}
+        client-id: ${{ secrets.EDITOR_BOT_APP_ID }}
         private-key: ${{ secrets.EDITOR_BOT_APP_PRIVATE_KEY }}
 
     - name: Checkout repository
@@ -40,6 +40,11 @@ jobs:
         from_date=$(date '+%Y-%m-%d' --date "6 day ago ${to_date}")
         post_dir=src/content/docs/blog/${year}/${week}
         image_dir=src/content/docs/blog/${year}/${week}/img
+        previous_to_date=$(date '+%Y-%m-%d' --date "7 day ago ${to_date}")
+        previous_from_date=$(date '+%Y-%m-%d' --date "6 day ago ${previous_to_date}")
+        previous_year=$(date +%Y --date "${previous_to_date}")
+        previous_week=$(date +%U --date "${previous_to_date}")
+        previous_slug=${previous_year}-${previous_week}
 
         # mkdir, hero alias
         mkdir -p ${image_dir}
@@ -54,6 +59,9 @@ jobs:
             echo "from_date=${from_date}" >> $GITHUB_OUTPUT
             echo "to_date=${to_date}" >> $GITHUB_OUTPUT
             echo "slug=${slug}" >> $GITHUB_OUTPUT
+            echo "previous_from_date=${previous_from_date}" >> $GITHUB_OUTPUT
+            echo "previous_to_date=${previous_to_date}" >> $GITHUB_OUTPUT
+            echo "previous_slug=${previous_slug}" >> $GITHUB_OUTPUT
         fi
 
     - name: Create Pull Request
@@ -84,3 +92,26 @@ jobs:
           - :sun_with_face: [Weather forecast - OpenWeatherMap](https://openweathermap.org/city/1850144)
         labels: posts
         assignees: legnoh
+
+    - name: Close previous week's PR if its post is unchanged
+      env:
+        GH_TOKEN: ${{ steps.github-app.outputs.token }}
+        PREVIOUS_FROM_DATE: ${{ steps.post-dir.outputs.previous_from_date }}
+        PREVIOUS_TO_DATE: ${{ steps.post-dir.outputs.previous_to_date }}
+        PREVIOUS_SLUG: ${{ steps.post-dir.outputs.previous_slug }}
+      run: |
+        pr_number=$(gh pr list --state open --head "${PREVIOUS_SLUG}" --json number --jq '.[0].number // empty')
+        if [ -z "${pr_number}" ]; then
+          echo "No open PR found for ${PREVIOUS_SLUG}."
+          exit 0
+        fi
+
+        post_path="src/content/docs/blog/${PREVIOUS_SLUG%-*}/${PREVIOUS_SLUG#*-}/${PREVIOUS_SLUG}.mdoc"
+        actual=$(gh api "repos/${GITHUB_REPOSITORY}/contents/${post_path}?ref=${PREVIOUS_SLUG}" --jq '.content' | base64 --decode)
+        expected=$(FROM_DATE="${PREVIOUS_FROM_DATE}" TO_DATE="${PREVIOUS_TO_DATE}" SLUG="${PREVIOUS_SLUG}" envsubst < src/templates/blog.mdoc)
+
+        if [ "${actual}" = "${expected}" ]; then
+          gh pr close "${pr_number}" --comment "Closing this PR because the post was not updated during its week."
+        else
+          echo "The post for ${PREVIOUS_SLUG} was updated; leaving PR #${pr_number} open."
+        fi
